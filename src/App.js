@@ -1,11 +1,14 @@
 import React from 'react';
-import { Container } from '@material-ui/core';
 
+import { Container } from '@material-ui/core';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import Navbar from './component/Navbar/Navbar';
 import Home from './component/Home/Home';
 import Auth from './component/Auth/Auth';
+
+import dotenv from 'dotenv';
+dotenv.config();
 
 const App = () => {
   //http://localhost:4000, add this also as proxy
