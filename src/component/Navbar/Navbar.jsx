@@ -1,18 +1,27 @@
 import React, { useState, useEffect } from 'react';
-import { AppBar, Typography, Toolbar, Button, Avatar } from '@material-ui/core';
+import {
+  AppBar,
+  Typography,
+  IconButton,
+  Toolbar,
+  Button,
+  Avatar,
+  MenuItem,
+  Menu,
+  Tooltip,
+} from '@material-ui/core';
 import useStyles from './styles.js';
-import logo from '../../images/logo.png';
+import logo from '../../images/logo.svg';
 import { Link } from 'react-router-dom';
 
 import { useDispatch } from 'react-redux';
 
 import { useNavigate, useLocation } from 'react-router-dom';
-
+const settings = ['Logout']; //setting array for profile
 const Navbar = () => {
   const classes = useStyles();
   const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
 
-  console.log(user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
@@ -24,9 +33,29 @@ const Navbar = () => {
   };
 
   useEffect(() => {
-    const token = user?.token;
+    // const token = user?.token;
     setUser(JSON.parse(localStorage.getItem('profile')));
+    console.log(`in : ${JSON.parse(localStorage.getItem('profile'))}`);
   }, [location]);
+
+  //check
+  const [anchorElNav, setAnchorElNav] = React.useState(null);
+  const [anchorElUser, setAnchorElUser] = React.useState(null);
+
+  const handleOpenNavMenu = (event) => {
+    setAnchorElNav(event.currentTarget);
+  };
+  const handleOpenUserMenu = (event) => {
+    setAnchorElUser(event.currentTarget);
+  };
+
+  const handleCloseNavMenu = () => {
+    setAnchorElNav(null);
+  };
+
+  const handleCloseUserMenu = () => {
+    setAnchorElUser(null);
+  };
 
   return (
     <AppBar
@@ -40,7 +69,7 @@ const Navbar = () => {
           component={Link}
           to='/'
           className={classes.heading}
-          variant='h2'
+          variant='h4'
           align='center'
         >
           WeShare
@@ -50,14 +79,41 @@ const Navbar = () => {
       <Toolbar className={classes.toolbar}>
         {user ? (
           <div className={classes.profile}>
-            <Avatar
-              className={classes.Avatar}
-              alt={user.result.name.givenName}
-              src={user.result.imageUrl}
+            <Tooltip title='Open settings'>
+              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                <Avatar
+                  className={classes.Avatar}
+                  alt={user.result.name.givenName}
+                  src={user.result.imageUrl}
+                >
+                  {user.result.name.charAt(0)}
+                </Avatar>
+              </IconButton>
+            </Tooltip>
+
+            <Menu
+              sx={{ mt: '60px' }}
+              id='menu-appbar'
+              anchorEl={anchorElUser}
+              anchorOrigin={{
+                vertical: 'bottom',
+                horizontal: 'right',
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              open={Boolean(anchorElUser)}
+              onClose={handleCloseUserMenu}
             >
-              {user.result.name.charAt(0)}
-            </Avatar>
-            <Typography className={classes.userName} variant='h6'>
+              {settings.map((setting) => (
+                <MenuItem key={setting} onClick={handleLogout}>
+                  <Typography textAlign='center'>{setting}</Typography>
+                </MenuItem>
+              ))}
+            </Menu>
+            {/* <Typography className={classes.userName} variant='h6'>
               {user.result.givenName}
             </Typography>
             <Button
@@ -67,7 +123,7 @@ const Navbar = () => {
               onClick={handleLogout}
             >
               Log out
-            </Button>
+            </Button> */}
           </div>
         ) : (
           <Button

@@ -19,30 +19,54 @@ import { useNavigate } from 'react-router-dom';
 
 import { useDispatch } from 'react-redux';
 
+import { signIn, signUp } from '../../actions/auth';
+
 import dotenv from 'dotenv';
-import { blue } from '@material-ui/core/colors';
 dotenv.config();
 
 const Auth = () => {
+  const initialFormState = {
+    firstName: '',
+    lastName: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
+  };
+
   const classes = useStyles();
   const [isSignup, setisSignup] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [formData, setformData] = useState(initialFormState);
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const handleSubmit = () => {};
-  const handleChange = () => {};
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setformData(formData);
+    if (isSignup) {
+      dispatch(signUp(formData, navigate));
+    } else {
+      dispatch(signIn(formData, navigate));
+    }
+
+    console.log(formData);
+  };
+  const handleChange = (e) => {
+    setformData({ ...formData, [e.target.name]: e.target.value });
+  };
 
   const googleSuccess = async (res) => {
-    const result = res?.profileObj; //optional chaining
-    const token = res?.tokenId;
+    const result = await res?.profileObj; //optional chaining
+    const token = await res?.tokenId;
     console.log(res);
-    navigate('/');
     try {
       dispatch({ type: 'AUTH', payload: { result, token } });
     } catch (e) {
       console.log(e);
     }
+    //put navigate in last so after data fetch from local then redirection happen
+    navigate('/');
   };
   const googleFailure = (err) => {
     console.log(`Sign In though google is unsuccesful. Try after some time !`);
@@ -64,7 +88,7 @@ const Auth = () => {
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
         </Avatar>
-        <Typography variant='h5'>{isSignup ? 'SignUp' : 'SignIN'}</Typography>
+        <Typography variant='h5'>{isSignup ? 'SignUP' : 'SignIN'}</Typography>
         <form className={classes.form} onSubmit={handleSubmit} half={true}>
           <Grid container spacing={2}>
             {isSignup && (
