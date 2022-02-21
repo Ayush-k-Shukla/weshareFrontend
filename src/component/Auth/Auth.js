@@ -15,17 +15,19 @@ import LockOutlinedIcon from '@material-ui/icons/LockOpenOutlined';
 import Input from './Input';
 import Icon from './Icon';
 
+import { useNavigate } from 'react-router-dom';
+
 import { useDispatch } from 'react-redux';
 
 import dotenv from 'dotenv';
+import { blue } from '@material-ui/core/colors';
 dotenv.config();
 
 const Auth = () => {
-  console.log(process.env.GOOGLE_AUTH_CLIENT_ID);
   const classes = useStyles();
   const [isSignup, setisSignup] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
-
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const handleSubmit = () => {};
@@ -35,9 +37,12 @@ const Auth = () => {
     const result = res?.profileObj; //optional chaining
     const token = res?.tokenId;
     console.log(res);
+    navigate('/');
     try {
       dispatch({ type: 'AUTH', payload: { result, token } });
-    } catch (e) {}
+    } catch (e) {
+      console.log(e);
+    }
   };
   const googleFailure = (err) => {
     console.log(`Sign In though google is unsuccesful. Try after some time !`);
@@ -111,18 +116,20 @@ const Auth = () => {
             {isSignup ? 'SignUp' : 'SignIn'}
           </Button>
           <GoogleLogin
-            clientId={process.env.GOOGLE_AUTH_CLIENT_ID}
+            clientId={process.env.REACT_APP_GOOGLE_AUTH_CLIENT_ID}
             render={(renderProps) => (
               <Button
                 className={classes.googleButton}
-                color='primary'
+                // color='secondary'
                 fullWidth
                 onClick={renderProps.onClick}
                 disabled={renderProps.disabled}
                 startIcon={<Icon />}
                 variant='contained'
               >
-                Google Sign In
+                <Typography style={{ fontWeight: 600, color: 'blue' }}>
+                  Google Sign In
+                </Typography>
               </Button>
             )}
             onSuccess={googleSuccess}

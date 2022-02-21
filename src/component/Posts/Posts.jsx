@@ -2,7 +2,7 @@ import React from 'react';
 import Post from './Post/Post';
 import useStyles from './styles';
 
-import { Grid, CircularProgress } from '@material-ui/core';
+import { Grid, LinearProgress, Box, CircularProgress } from '@material-ui/core';
 
 import { useSelector } from 'react-redux';
 
@@ -11,7 +11,11 @@ const Posts = ({ setCurrentId }) => {
   console.log(posts);
   const classes = useStyles();
   return !posts.length ? (
-    <CircularProgress />
+    <>
+      <Box sx={{ width: '100%', marginTop: '20%', justifyContent: 'center' }}>
+        <LinearProgress color='secondary' />
+      </Box>
+    </>
   ) : (
     <Grid
       className={classes.container}

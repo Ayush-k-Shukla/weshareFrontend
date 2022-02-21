@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Container } from '@material-ui/core';
+import { Container, Box } from '@material-ui/core';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import Navbar from './component/Navbar/Navbar';
@@ -15,14 +15,14 @@ const App = () => {
 
   return (
     <BrowserRouter>
-      <Container maxWidth='lg'>
+      <Box>
         <Navbar />
         {/* rect-router-dom 6 does not support Switch , use Routes */}
         <Routes>
           <Route path='/' exact element={<Home />} />
           <Route path='/auth' exact element={<Auth />} />
         </Routes>
-      </Container>
+      </Box>
     </BrowserRouter>
   );
 };
