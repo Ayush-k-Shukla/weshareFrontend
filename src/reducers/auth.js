@@ -1,9 +1,10 @@
-const authReducer = (state = [], action) => {
+const authReducer = (state = { authData: null }, action) => {
   //always must return from switch case
   switch (action.type) {
     case 'AUTH':
-      localStorage.setItem('profile', JSON.stringify({ ...action?.payload }));
-      return { ...state, authData: action?.payload };
+      console.log(`inside reduces : ${action.data}`);
+      localStorage.setItem('profile', JSON.stringify({ ...action?.data }));
+      return { ...state, authData: action?.data, loading: false };
     case 'LOGOUT':
       localStorage.clear();
       return { ...state, authData: null };

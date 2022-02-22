@@ -57,13 +57,10 @@ const Navbar = () => {
     setAnchorElUser(null);
   };
 
+  console.log(user);
+
   return (
-    <AppBar
-      className={classes.appBar}
-      position='static'
-      fullWidth
-      color='inherit'
-    >
+    <AppBar className={classes.appBar} position='static' fullWidth>
       <div className={classes.brandContainer}>
         <Typography
           component={Link}
@@ -71,6 +68,7 @@ const Navbar = () => {
           className={classes.heading}
           variant='h4'
           align='center'
+          style={{ color: '#33eaff' }}
         >
           WeShare
         </Typography>
@@ -83,8 +81,8 @@ const Navbar = () => {
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar
                   className={classes.Avatar}
-                  alt={user.result.name.givenName}
-                  src={user.result.imageUrl}
+                  alt={user.result.name}
+                  // src={user.result}
                 >
                   {user.result.name.charAt(0)}
                 </Avatar>
@@ -113,17 +111,6 @@ const Navbar = () => {
                 </MenuItem>
               ))}
             </Menu>
-            {/* <Typography className={classes.userName} variant='h6'>
-              {user.result.givenName}
-            </Typography>
-            <Button
-              variant='contained'
-              className={classes.logout}
-              color='secondary'
-              onClick={handleLogout}
-            >
-              Log out
-            </Button> */}
           </div>
         ) : (
           <Button

@@ -46,11 +46,10 @@ const Auth = () => {
     setformData(formData);
     if (isSignup) {
       dispatch(signUp(formData, navigate));
+      console.log(formData);
     } else {
       dispatch(signIn(formData, navigate));
     }
-
-    console.log(formData);
   };
   const handleChange = (e) => {
     setformData({ ...formData, [e.target.name]: e.target.value });
@@ -78,7 +77,7 @@ const Auth = () => {
     setShowPassword(false);
   };
   const handleShowPassword = () => {
-    setShowPassword(!showPassword);
+    setShowPassword((e) => !e);
   };
 
   return (
@@ -119,13 +118,14 @@ const Auth = () => {
               handleChange={handleChange}
               type={showPassword ? 'text' : 'password'}
               ha
-              ndleShowPassword={handleShowPassword}
+              handleShowPassword={handleShowPassword}
             />
             {isSignup && (
               <Input
                 name='confirmPassword'
                 label='Confirm password'
                 handleChange={handleChange}
+                type='password'
               />
             )}
           </Grid>

@@ -1,11 +1,15 @@
 import axios from 'axios';
-const url = 'http://localhost:4000/posts';
+
+const API = axios.create({ baseURL: 'http://localhost:4000' });
 
 // * backend hosted at : https://sharewithmebac.herokuapp.com/
 
-export const fetchPosts = () => axios.get(url);
-export const createPost = (newPost) => axios.post(url, newPost);
+export const fetchPosts = () => API.get('/posts');
+export const createPost = (newPost) => API.post('/posts', newPost);
 export const updatePost = (newPost, currentId) =>
-  axios.patch(`${url}/${currentId}`, newPost);
-export const deletePost = (id) => axios.delete(`${url}/${id}`, id);
-export const likePost = (id) => axios.patch(`${url}/${id}/likePost`);
+  axios.patch(`/posts/${currentId}`, newPost);
+export const deletePost = (id) => API.delete(`/posts/${id}`, id);
+export const likePost = (id) => API.patch(`/posts/${id}/likePost`);
+
+export const signIn = (formData) => API.post(`/user/signin`, formData);
+export const signUp = (formData) => API.post(`/user/signup`, formData);
