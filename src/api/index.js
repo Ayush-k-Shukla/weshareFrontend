@@ -3,6 +3,15 @@ import axios from 'axios';
 const API = axios.create({ baseURL: 'http://localhost:4000' });
 
 // * backend hosted at : https://sharewithmebac.herokuapp.com/
+//send data to backend if user is logged in
+API.interceptors.request.use((req) => {
+  if (localStorage.getItem('profile')) {
+    req.headers.Authorization = `Bearer ${
+      JSON.parse(localStorage.getItem('profile')).token
+    }`;
+  }
+  return req;
+});
 
 export const fetchPosts = () => API.get('/posts');
 export const createPost = (newPost) => API.post('/posts', newPost);

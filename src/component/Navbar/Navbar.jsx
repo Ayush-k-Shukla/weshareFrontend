@@ -17,7 +17,9 @@ import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
 import { useNavigate, useLocation } from 'react-router-dom';
+import jwtDecode from 'jwt-decode';
 const settings = ['Logout']; //setting array for profile
+
 const Navbar = () => {
   const classes = useStyles();
   const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
@@ -33,31 +35,39 @@ const Navbar = () => {
   };
 
   useEffect(() => {
-    // const token = user?.token;
+    const token = user?.token;
+    //check for token expired or not
+    if (token) {
+      const decodedToken = jwtDecode(token);
+      if (decodedToken.exp * 1000 < new Date().getTime()) {
+        handleLogout();
+      }
+    }
+
     setUser(JSON.parse(localStorage.getItem('profile')));
-    console.log(`in : ${JSON.parse(localStorage.getItem('profile'))}`);
+    // console.log(`in : ${JSON.parse(localStorage.getItem('profile'))}`);
   }, [location]);
 
   //check
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
+  // const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
-  const handleOpenNavMenu = (event) => {
-    setAnchorElNav(event.currentTarget);
-  };
+  // const handleOpenNavMenu = (event) => {
+  //   setAnchorElNav(event.currentTarget);
+  // };
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
   };
 
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
-  };
+  // const handleCloseNavMenu = () => {
+  //   setAnchorElNav(null);
+  // };
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
 
-  console.log(user);
+  // console.log(user);
 
   return (
     <AppBar className={classes.appBar} position='static' fullWidth>

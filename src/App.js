@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Container, Box } from '@material-ui/core';
+import { Box } from '@material-ui/core';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import Navbar from './component/Navbar/Navbar';
