@@ -1,3 +1,13 @@
+# WeShare
+
+### Frontend Repo
+
+- https://github.com/Ayush-k-Shukla/weshareFrontend
+
+### Backend Repo
+
+- https://github.com/Ayush-k-Shukla/weshareBackend
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
