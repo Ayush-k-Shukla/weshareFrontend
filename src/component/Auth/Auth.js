@@ -57,9 +57,9 @@ const Auth = () => {
   const googleSuccess = async (res) => {
     const result = await res?.profileObj; //optional chaining
     const token = await res?.tokenId;
-    console.log(res);
+    console.log(`google suc :${result} ${token}`);
     try {
-      dispatch({ type: 'AUTH', payload: { result, token } });
+      dispatch({ type: 'AUTH', data: { result, token } });
     } catch (e) {
       console.log(e);
     }

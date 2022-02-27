@@ -91,10 +91,10 @@ const Navbar = () => {
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar
                   className={classes.Avatar}
-                  alt={user.result.name}
+                  alt={user?.result?.name}
                   // src={user.result}
                 >
-                  {user.result.name.charAt(0)}
+                  {user?.result?.name.charAt(0)}
                 </Avatar>
               </IconButton>
             </Tooltip>
