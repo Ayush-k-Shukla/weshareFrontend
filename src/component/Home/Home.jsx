@@ -110,7 +110,11 @@ const Home = () => {
               </AppBar>
 
               <Form currentId={currentId} setCurrentId={setCurrentId} />
-              <Paper elevation={5}>
+              <Paper
+                elevation={5}
+                style={{ marginTop: '2px' }}
+                className={classes.pagination}
+              >
                 <Paginate page={page} />
               </Paper>
             </Grid>
