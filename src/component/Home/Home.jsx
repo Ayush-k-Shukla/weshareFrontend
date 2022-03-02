@@ -64,61 +64,91 @@ const Home = () => {
 
   return (
     <div>
+      {/* <div> */}
+      <Container className={classes.appBarSearch}>
+        <Container
+          style={{
+            display: 'flex',
+            color: 'white',
+            padding: '0',
+          }}
+        >
+          <input
+            name='search'
+            label='Search Title'
+            onKeyPress={handleSearchKeyPress}
+            value={search}
+            placeholder='Search title....'
+            onChange={(e) => setSearch(e.target.value)}
+            style={{
+              marginRight: '8px',
+              outline: 'none',
+              border: 'none',
+              backgroundColor: '#2a292e',
+              color: 'white',
+              borderRadius: '10px',
+              padding: '8px 10px',
+            }}
+            fullWidth
+          />
+          <ChipInput
+            value={tagSearch}
+            onAdd={handleTagAdd}
+            placeholder='Search tags...'
+            onDelete={handleTagDelete}
+            disableUnderline={true}
+            style={{
+              marginRight: '8px',
+              outline: 'none !important',
+              border: 'none !important',
+              backgroundColor: '#2a292e',
+              color: 'white !important',
+              borderRadius: '10px',
+              padding: '8px 10px !important',
+            }}
+            fullWidth
+          />
+        </Container>
+
+        <Button
+          onClick={searchPost}
+          // className={classes.searchButton}
+          color='primary'
+          variant='contained'
+          style={{
+            backgroundColor: '#6d63fe',
+            padding: '8px 40px',
+            borderRadius: '10px',
+            textTransform: 'none',
+          }}
+        >
+          Search
+        </Button>
+      </Container>
+      {/* </div> */}
       <Grow in>
         <Container maxWidth='xl'>
-          <Grid
-            container
-            justify='space-between'
-            alignItems='stretch'
-            spacing={3}
-            className={classes.gridContainer}
-          >
-            <Grid item xs={12} sm={6} md={9}>
-              <Posts setCurrentId={setCurrentId} />
-            </Grid>
-            <Grid item xs={12} sm={6} md={3}>
-              <AppBar
-                className={classes.appBarSearch}
-                position='static'
-                color='inherit'
-              >
-                <TextField
-                  name='search'
-                  variant='outlined'
-                  label='Search Title'
-                  fullWidth
-                  onKeyPress={handleSearchKeyPress}
-                  value={search}
-                  onChange={(e) => setSearch(e.target.value)}
-                />
-                <ChipInput
-                  style={{ margin: '10px 0px' }}
-                  value={tagSearch}
-                  onAdd={handleTagAdd}
-                  onDelete={handleTagDelete}
-                  label='Search Tags'
-                  variant='outlined'
-                />
-                <Button
-                  onClick={searchPost}
-                  className={classes.searchButton}
-                  color='primary'
-                  variant='contained'
-                >
-                  Search
-                </Button>
-              </AppBar>
-
-              <Form currentId={currentId} setCurrentId={setCurrentId} />
-              <Paper
-                elevation={5}
-                style={{ marginTop: '2px' }}
-                className={classes.pagination}
-              >
-                <Paginate page={page} />
-              </Paper>
-            </Grid>
+          <Grid item xs={12} sm={6} md={12}>
+            <Posts setCurrentId={setCurrentId} />
           </Grid>
+          {/* </Grid> */}
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'center',
+              float: 'center',
+            }}
+          >
+            <Paper
+              elevation={5}
+              style={{
+                marginBottom: '20px',
+              }}
+              className={classes.pagination}
+            >
+              <Paginate page={page} />
+            </Paper>
+          </div>
         </Container>
       </Grow>
     </div>

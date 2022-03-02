@@ -5,12 +5,18 @@ export default makeStyles((theme) => ({
     borderRadius: 4,
     marginBottom: '1rem',
     display: 'flex',
-    padding: '16px',
+    padding: '5px',
+
+    justifyContent: 'space-between',
   },
   pagination: {
     borderRadius: 4,
     marginTop: '1rem',
-    padding: '16px',
+    padding: '5px',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: 'max-content',
   },
   gridContainer: {
     [theme.breakpoints.down('xs')]: {

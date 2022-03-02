@@ -13,13 +13,15 @@ import { useSelector } from 'react-redux';
 
 import { Link } from 'react-router-dom';
 
+import { useNavigate } from 'react-router-dom';
+
 const Form = ({ currentId, setCurrentId }) => {
   const classes = useStyles();
   const post = useSelector((state) =>
     currentId ? state.posts.posts.find((p) => p._id === currentId) : null
   );
   const dispatch = useDispatch();
-
+  const navigate = useNavigate();
   const [postData, setPostData] = useState({
     title: '',
     message: '',
@@ -42,17 +44,18 @@ const Form = ({ currentId, setCurrentId }) => {
   const handleSubmit = async (e) => {
     //if use prevent default "react-error-overlay": "6.0.9", this is rquired
 
-    //this prevent default err need to be fixed
-    console.log(`in form : ${JSON.stringify(postData)}`);
-    console.log(`in form : ${JSON.stringify(user.result.name)}`);
+    //this prevent default err need to be fixe
     // e.preventDefault();
     if (currentId) {
       dispatch(
         updatePost(currentId, { ...postData, name: user?.result?.name })
       );
+      navigate('/');
+
       clearAll();
     } else {
       dispatch(createPost({ ...postData, name: user?.result?.name }));
+      navigate('/');
       clearAll();
     }
   };

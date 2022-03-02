@@ -18,7 +18,7 @@ import { useDispatch } from 'react-redux';
 
 import { useNavigate, useLocation } from 'react-router-dom';
 import jwtDecode from 'jwt-decode';
-const settings = ['Logout']; //setting array for profile
+const settings = ['Logout', 'createPost']; //setting array for profile
 
 const Navbar = () => {
   const classes = useStyles();
@@ -70,7 +70,12 @@ const Navbar = () => {
   // console.log(user);
 
   return (
-    <AppBar className={classes.appBar} position='static' fullWidth>
+    <AppBar
+      className={classes.appBar}
+      position='static'
+      fullWidth
+      style={{ backgroundColor: '#484479' }}
+    >
       <div className={classes.brandContainer}>
         <Typography
           component={Link}
@@ -115,16 +120,23 @@ const Navbar = () => {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting) => (
+              <MenuItem key='Logout' onClick={handleLogout}>
+                <Typography textAlign='center'>Logout</Typography>
+              </MenuItem>
+              <MenuItem key='create' onClick={() => navigate('/create')}>
+                <Typography textAlign='center'>CreatePost</Typography>
+              </MenuItem>
+              {/* {settings.map((setting) => (
                 <MenuItem key={setting} onClick={handleLogout}>
                   <Typography textAlign='center'>{setting}</Typography>
                 </MenuItem>
-              ))}
+              ))} */}
             </Menu>
           </div>
         ) : (
           <Button
             variant='contained'
+            style={{ backgroundColor: '#6d63fe' }}
             color='primary'
             to='/auth'
             component={Link}
