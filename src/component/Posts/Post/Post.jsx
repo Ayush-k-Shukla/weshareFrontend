@@ -58,38 +58,34 @@ const Post = ({ post, setCurrentId }) => {
   };
   return (
     <Card className={classes.card} raised elevation={6}>
-      {/* <ButtonBase
-        onClick={openPost}
-        className={classes.cardActions}
-        component='span'
-      > */}
-
-      <div onClick={openPost} style={{ cursor: 'pointer' }}>
-        <CardMedia
-          className={classes.media}
-          image={post?.selectedFile}
-          title={post?.title}
-        />
-        <div className={classes.overlay}>
-          <Typography variant='h6'>{post?.name}</Typography>
-          {/* here created at time relative to server fix rwmainint */}
-          <Typography variant='body2'>
-            {moment(post?.createdAt).fromNow()}
-          </Typography>
+      <CardMedia
+        className={classes.media}
+        image={post?.selectedFile}
+        title={post?.title}
+      />
+      <div className={classes.overlay}>
+        <Typography variant='h6'>{post?.name}</Typography>
+        {/* here created at time relative to server fix rwmainint */}
+        <Typography variant='body2'>
+          {moment(post?.createdAt).fromNow()}
+        </Typography>
+      </div>
+      {(user?.result?.googleId === post?.creator ||
+        user?.result?._id === post?.creator) && (
+        <div className={classes.overlay2}>
+          <Button
+            style={{ color: 'white' }}
+            size='small'
+            onClick={() => {
+              navigate('/create');
+              setCurrentId(post._id);
+            }}
+          >
+            <MoreHorizIcon fontSize='default' />
+          </Button>
         </div>
-        {(user?.result?.googleId === post?.creator ||
-          user?.result?._id === post?.creator) && (
-          <div className={classes.overlay2}>
-            <Button
-              style={{ color: 'white' }}
-              size='small'
-              onClick={() => setCurrentId(post._id)}
-            >
-              <MoreHorizIcon fontSize='default' />
-            </Button>
-          </div>
-        )}
-
+      )}
+      <div onClick={openPost} style={{ cursor: 'pointer' }}>
         <div className={classes.details}>
           <Typography variant='body2' color='textSecondary'>
             {post?.tags?.map((tag) => `#${tag} `)}
@@ -105,7 +101,9 @@ const Post = ({ post, setCurrentId }) => {
             color='textSecondary'
             component='p'
           >
-            {post.message}
+            {post.message.length > 50
+              ? `${post.message.substring(0, 50)}...`
+              : post.message}
           </Typography>
         </CardContent>
       </div>

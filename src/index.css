@@ -7,7 +7,7 @@ body {
 }
 
 .MuiInputBase-input {
-  color: white !important;
+  /* color: white !important; */
   /* padding: 8px 10px 8px 8px !important; */
   font-size: small !important;
 }

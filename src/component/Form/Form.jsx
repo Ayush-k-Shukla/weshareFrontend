@@ -47,21 +47,20 @@ const Form = ({ currentId, setCurrentId }) => {
     //this prevent default err need to be fixe
     // e.preventDefault();
     if (currentId) {
+      navigate('/create');
       dispatch(
         updatePost(currentId, { ...postData, name: user?.result?.name })
       );
-      navigate('/');
 
-      clearAll();
+      navigate('/');
     } else {
       dispatch(createPost({ ...postData, name: user?.result?.name }));
       navigate('/');
-      clearAll();
     }
   };
 
   const clearAll = () => {
-    setCurrentId(0);
+    setCurrentId(null);
     setPostData({
       title: '',
       message: '',
@@ -98,6 +97,7 @@ const Form = ({ currentId, setCurrentId }) => {
           variant='outlined'
           label='Title'
           fullWidth
+          style={{ color: 'black !important' }}
           value={postData.title}
           onChange={(e) => setPostData({ ...postData, title: e.target.value })}
         />
