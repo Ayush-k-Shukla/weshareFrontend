@@ -7,6 +7,7 @@ import * as api from '../api/index.js';
 export const getPost = (id) => async (dispatch) => {
   try {
     dispatch({ type: 'START_LOADING' });
+
     const { data } = await api.fetcPost(id);
     dispatch({ type: 'FETCH_ONE', payload: data });
     dispatch({ type: 'END_LOADING' });
