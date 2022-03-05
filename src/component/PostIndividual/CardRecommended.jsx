@@ -10,7 +10,14 @@ import {
 
 const CardRecommended = ({ post }) => {
   return (
-    <Card style={{ margin: '20px 2px 2px 2px', padding: '2px 2px 2px 2px' }}>
+    <Card
+      style={{
+        margin: '20px 2px 2px 2px',
+        padding: '2px 2px 2px 2px',
+        backgroundColor: '#111229',
+        color: '#f9f8f8',
+      }}
+    >
       <CardActionArea>
         <CardMedia
           component='img'

@@ -18,6 +18,7 @@ const Paginate = ({ page }) => {
 
   return (
     <Pagination
+      color='secondary'
       classes={{ ul: classes.ul }}
       count={numberOfPages}
       page={Number(page) || 1}

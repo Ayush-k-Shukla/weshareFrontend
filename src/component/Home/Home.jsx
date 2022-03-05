@@ -143,6 +143,7 @@ const Home = () => {
               elevation={5}
               style={{
                 marginBottom: '20px',
+                backgroundColor: '#101228',
               }}
               className={classes.pagination}
             >

@@ -8,6 +8,7 @@ import {
   Typography,
   Divider,
   Button,
+  LinearProgress,
 } from '@material-ui/core';
 import Tag from './Tag';
 import second from '../../images/logo.png';
@@ -41,14 +42,17 @@ const PostIndividual = () => {
       );
     }
   }, [post]);
-  //use post.data
 
   if (!post) return null;
 
   if (isLoading) {
     return (
       // <Paper variant='' elevation={6} className={classes.loadingPaper}>
-      <CircularProgress size='7em' />
+
+      // <div>
+      <LinearProgress size='7em' />
+      // </div>
+
       // </Paper>
     );
   }

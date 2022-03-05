@@ -19,6 +19,8 @@ import { useDispatch } from 'react-redux';
 import ThumbUpAltOutlined from '@material-ui/icons/ThumbUpAltOutlined';
 import { useNavigate } from 'react-router-dom';
 
+import Tag from '../../PostIndividual/Tag';
+
 const Post = ({ post, setCurrentId }) => {
   // console.log(`id : ${post._id}`);
   const classes = useStyles();
@@ -57,7 +59,12 @@ const Post = ({ post, setCurrentId }) => {
     navigate(`/posts/${post._id}`);
   };
   return (
-    <Card className={classes.card} raised elevation={6}>
+    <Card
+      className={classes.card}
+      raised
+      elevation={6}
+      style={{ backgroundColor: '#111229' }}
+    >
       <CardMedia
         className={classes.media}
         image={post?.selectedFile}
@@ -86,12 +93,20 @@ const Post = ({ post, setCurrentId }) => {
         </div>
       )}
       <div onClick={openPost} style={{ cursor: 'pointer' }}>
-        <div className={classes.details}>
-          <Typography variant='body2' color='textSecondary'>
-            {post?.tags?.map((tag) => `#${tag} `)}
-          </Typography>
+        <div
+          className={classes.details}
+          style={{ display: 'flex', justifyContent: 'flex-start' }}
+        >
+          {post?.tags?.map((tag) => (
+            <Tag value={tag} />
+          ))}
         </div>
-        <Typography className={classes.title} variant='h5' gutterBottom>
+        <Typography
+          className={classes.title}
+          variant='h5'
+          gutterBottom
+          style={{ color: '#f9f8f8' }}
+        >
           {post && post.title}
         </Typography>
         <CardContent>
@@ -100,6 +115,7 @@ const Post = ({ post, setCurrentId }) => {
             variant='body2'
             color='textSecondary'
             component='p'
+            style={{ color: '#f9f8f8' }}
           >
             {post.message.length > 50
               ? `${post.message.substring(0, 50)}...`
@@ -112,7 +128,7 @@ const Post = ({ post, setCurrentId }) => {
       <CardActions className={classes.cardActions}>
         <Button
           size='small'
-          color='primary'
+          style={{ color: '#044ac5' }}
           disabled={!user?.result}
           onClick={() => {
             dispatch(likePost(post._id));
