@@ -7,9 +7,9 @@ const reducers = (state = { isLoading: true, posts: [] }, action) => {
     case 'FETCH_ALL':
       return {
         ...state,
-        posts: action.payload.data,
-        currentPage: action.payload.currentPage,
-        numberOfPages: action.payload.numberOfPages,
+        posts: action.payload.data.data,
+        currentPage: action.payload.data.currentPage, //change .data
+        numberOfPages: action.payload.data.numberOfPages,
       };
     case 'FETCH_ONE':
       return { ...state, post: action.payload };
