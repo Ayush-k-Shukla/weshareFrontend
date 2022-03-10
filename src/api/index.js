@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API = axios.create({ baseURL: 'https://sharewithmebac.herokuapp.com' });
+const API = axios.create({ baseURL: 'http://localhost:4000' });
 
 // * backend hosted at : https://sharewithmebac.herokuapp.com/
 //send data to backend if user is logged in

@@ -54,7 +54,7 @@ const Form = ({ currentId, setCurrentId }) => {
 
       navigate('/');
     } else {
-      dispatch(createPost({ ...postData, name: user?.result?.name }));
+      dispatch(createPost({ ...postData, name: user?.result?.name }, navigate));
       navigate('/');
     }
   };

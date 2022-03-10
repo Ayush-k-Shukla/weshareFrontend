@@ -8,7 +8,7 @@ import Navbar from './component/Navbar/Navbar';
 import Home from './component/Home/Home';
 import Auth from './component/Auth/Auth';
 import PostIndividual from './component/PostIndividual/PostIndividual';
-
+import useMediaQuery from '@mui/material/useMediaQuery';
 import dotenv from 'dotenv';
 dotenv.config();
 // const PostIndividual = lazy(() =>
@@ -19,10 +19,13 @@ dotenv.config();
 const App = () => {
   //http://localhost:4000, add this also as proxy
   const user = JSON.parse(localStorage.getItem('profile'));
+
+  const matches = useMediaQuery('(min-width:1200px)');
+
   return (
     <BrowserRouter>
       <Navbar />{' '}
-      <Container fullwidth style={{ padding: '40px 160px' }}>
+      <Container >
         {/* rect-router-dom 6 does not support Switch , use Routes */}
         {/* <Suspense fallback={<div>Loading...</div>}> */}
         <Routes>

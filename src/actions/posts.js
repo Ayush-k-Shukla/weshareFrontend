@@ -33,10 +33,9 @@ export const getPostsBySearch = (searchQuery) => async (dispatch) => {
   try {
     dispatch({ type: 'START_LOADING' });
     console.log(`query : ${JSON.stringify(searchQuery)}`);
-    const {
-      data: { data },
-    } = await api.fetchPostsBySearch(searchQuery);
-
+    const data = await api.fetchPostsBySearch(searchQuery);
+    console.log(data);
+    //data = data.data;
     dispatch({ type: 'FETCH_BY_SEARCH', payload: data });
     dispatch({ type: 'END_LOADING' });
   } catch (error) {
@@ -44,10 +43,11 @@ export const getPostsBySearch = (searchQuery) => async (dispatch) => {
   }
 };
 
-export const createPost = (post) => async (dispatch) => {
+export const createPost = (post, navigate) => async (dispatch) => {
   try {
     dispatch({ type: 'START_LOADING' });
     const { data } = await api.createPost(post);
+    navigate(`/posts/${data._id}`);
     dispatch({ type: 'CREATE', data });
     dispatch({ type: 'END_LOADING' });
   } catch (e) {

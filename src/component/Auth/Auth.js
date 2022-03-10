@@ -45,7 +45,7 @@ const Auth = () => {
     setformData(formData);
     if (isSignup) {
       dispatch(signUp(formData, navigate));
-      console.log(formData);
+      // console.log(formData);
     } else {
       dispatch(signIn(formData, navigate));
     }

@@ -74,7 +74,7 @@ const Navbar = () => {
       className={classes.appBar}
       position='static'
       fullWidth
-      style={{ backgroundColor: '#484479' }}
+      //  style={{ backgroundColor: '#484479' }}
     >
       <div className={classes.brandContainer}>
         <Typography

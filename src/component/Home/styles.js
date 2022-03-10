@@ -23,4 +23,7 @@ export default makeStyles((theme) => ({
       flexDirection: 'column-reverse',
     },
   },
+  searchClass: {
+    color: 'white',
+  },
 }));

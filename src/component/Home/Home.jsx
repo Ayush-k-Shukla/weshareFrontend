@@ -61,9 +61,8 @@ const Home = () => {
       navigate('/');
     }
   };
-
   return (
-    <div>
+    <div style={{ padding: '40px 14px' }}>
       {/* <div> */}
       <Container className={classes.appBarSearch}>
         <Container
@@ -92,6 +91,7 @@ const Home = () => {
             fullWidth
           />
           <ChipInput
+            className={classes.searchClass}
             value={tagSearch}
             onAdd={handleTagAdd}
             placeholder='Search tags...'

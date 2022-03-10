@@ -11,26 +11,26 @@ import {
   LinearProgress,
 } from '@material-ui/core';
 import Tag from './Tag';
-import second from '../../images/logo.png';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { getPost, getPostsBySearch } from '../../actions/posts';
 import useStyles from './styles.js';
 import moment from 'moment';
 import CardRecommended from './CardRecommended';
+import CommentSection from './CommentSection';
 
 const PostIndividual = () => {
   const { post, isLoading, posts } = useSelector((state) => state.posts);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  console.log(`indi: ${JSON.stringify(post)}`);
+  console.log(posts);
   const classes = useStyles();
   const { id } = useParams();
 
   // var scrollLeft = element.scrollLeft;
 
   useEffect(() => {
-    console.log(id);
+    // console.log(id);
     dispatch(getPost(id));
   }, [id]);
 
@@ -46,25 +46,19 @@ const PostIndividual = () => {
   if (!post) return null;
 
   if (isLoading) {
-    return (
-      // <Paper variant='' elevation={6} className={classes.loadingPaper}>
-
-      // <div>
-      <LinearProgress size='7em' />
-      // </div>
-
-      // </Paper>
-    );
+    return <LinearProgress size='7em' />;
   }
 
-  const recommendedPosts = posts.filter((pos) => pos._id !== post?.data._id);
+  const recommendedPosts = posts?.data?.data.filter(
+    (pos) => pos._id !== post?.data._id
+  );
 
   const scroll = (scrollOffset) => {
     this.refs.current.scrollLeft += scrollOffset;
   };
 
   return (
-    <div>
+    <div style={{ padding: '40px 140px' }}>
       <div>
         <div>
           <Typography
@@ -95,7 +89,7 @@ const PostIndividual = () => {
           {' '}
           <Typography variant='h6'>Created by: {post.data.name}</Typography>
           <Typography variant='body1'>
-            {moment(post.createdAt).fromNow()}
+            {moment(post.data.createdAt).format('MMM Do YY')}
           </Typography>
         </div>
         <div className={classes.card}>
@@ -128,13 +122,15 @@ const PostIndividual = () => {
           </div>
         </div>
       </div>
+      <CommentSection post={post} />
+
       {recommendedPosts.length && (
         <div
           style={{
             display: 'flex',
-
-            justifyContent: 'space-between',
+            justifyContent: 'center',
             alignSelf: 'flex-start',
+            flexWrap: 'wrap',
           }}
         >
           {/* <Button onClick={() => scroll(-20)}>LEFT</Button> */}
