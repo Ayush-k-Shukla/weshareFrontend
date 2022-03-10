@@ -11,21 +11,15 @@ body {
 .WAMuiChipInput-standard-18 {
   color: white !important;
   padding: 2px 4px;
-  color: #1d1e38;
 }
 
 .mainPage {
   padding: 40px 60px;
 }
-
-/* @media only screen and (min-width: 1200px) {
-  .mainPage {
-    padding: 40px 160px;
-  }
+.MuiTextField-root {
+  background-color: #314054;
 }
-
-@media only screen and (max-width: 600px) {
-  .mainPage {
-    padding: 5px 8px;
-  }
-} */
+//for add blog form
+..MuiTextField-root {
+  width: 100%;
+}

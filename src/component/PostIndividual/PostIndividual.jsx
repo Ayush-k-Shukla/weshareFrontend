@@ -60,71 +60,70 @@ const PostIndividual = () => {
   return (
     <div style={{ padding: '40px 140px' }}>
       <div>
-        <div>
-          <Typography
-            variant='h3'
-            component='h2'
-            style={{ color: 'antiquewhite' }}
-          >
-            {post.data.title}
-          </Typography>
-        </div>
-        <div className={classes.imageSection}>
-          <img
-            className={classes.media}
-            src={
-              post.data.selectedFile ||
-              'https://user-images.githubusercontent.com/194400/49531010-48dad180-f8b1-11e8-8d89-1e61320e1d82.png'
-            }
-            alt={post.title}
-          />
-        </div>
-        <div
-          style={{
-            color: '#91b2e0',
-            display: 'flex',
-            justifyContent: 'space-between',
-          }}
+        <Typography
+          variant='h3'
+          component='h2'
+          style={{ color: 'antiquewhite' }}
         >
-          {' '}
-          <Typography variant='h6'>Created by: {post.data.name}</Typography>
-          <Typography variant='body1'>
-            {moment(post.data.createdAt).format('MMM Do YY')}
+          {post.data.title}
+        </Typography>
+      </div>
+      <div className={classes.imageSection}>
+        <img
+          className={classes.media}
+          src={
+            post.data.selectedFile ||
+            'https://user-images.githubusercontent.com/194400/49531010-48dad180-f8b1-11e8-8d89-1e61320e1d82.png'
+          }
+          alt={post.title}
+        />
+      </div>
+      <div
+        style={{
+          color: '#91b2e0',
+          display: 'flex',
+          justifyContent: 'space-between',
+        }}
+      >
+        {' '}
+        <Typography variant='h6'>Created by: {post.data.name}</Typography>
+        <Typography variant='body1'>
+          {moment(post.data.createdAt).format('MMM Do YY')}
+        </Typography>
+      </div>
+      <div className={classes.card}>
+        <div className={classes.section}>
+          <Typography
+            gutterBottom
+            variant='h6'
+            color='textSecondary'
+            component='h2'
+            style={{ display: 'flex', justifyContent: 'start' }}
+          >
+            {post?.data?.tags?.map((tag) => (
+              <Tag value={tag} />
+            ))}
           </Typography>
-        </div>
-        <div className={classes.card}>
-          <div className={classes.section}>
-            <Typography
-              gutterBottom
-              variant='h6'
-              color='textSecondary'
-              component='h2'
-              style={{ display: 'flex', justifyContent: 'start' }}
-            >
-              {post?.data?.tags?.map((tag) => (
-                <Tag value={tag} />
-              ))}
-            </Typography>
-            <Divider style={{ margin: '20px 0' }} />
-            <Typography
-              gutterBottom
-              variant='body1'
-              component='p'
-              style={{
-                fontWeight: 'font-weight: 600',
-                color: '#d5d5d5',
-              }}
-            >
-              {post.data.message}
-            </Typography>
+          {/* <Divider style={{ margin: '20px 0' }} /> */}
+          <Typography
+            gutterBottom
+            variant='body1'
+            component='p'
+            style={{
+              fontWeight: 'font-weight: 600',
+              color: '#d5d5d5',
+            }}
+          >
+            {post.data.message}
+          </Typography>
 
-            <Divider style={{ margin: '20px 0' }} />
-          </div>
+          {/* <Divider style={{ margin: '20px 0' }} /> */}
         </div>
       </div>
-      <CommentSection post={post} />
 
-      {recommendedPosts.length && (
+      <CommentSection post={post} />
+      <Divider style={{ margin: '20px 0', color: '#044ac5' }} />
+      {recommendedPosts?.length && (
         <div
           style={{
             display: 'flex',

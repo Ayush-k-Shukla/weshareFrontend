@@ -9,15 +9,15 @@ const CommentSection = (post) => {
   const classes = useStyles();
   const [comments, setComments] = useState([1, 2, 3, 4]);
   return (
-    <div>
+    <div style={{ backgroundColor: '#314054', padding: '10px' }}>
       <div className={classes.commentsOuterContainer}>
         <div className={classes.commentsInnerContainer}>
-          <Typography style={{ color: 'whitesmoke' }} gutterBottom>
+          <Typography style={{ color: '#e9f1f8' }} gutterBottom>
             Comments
           </Typography>
           {comments.map((c, i) => (
             <Typography
-              style={{ color: 'whitesmoke' }}
+              style={{ color: '#e9f1f8' }}
               key={i}
               gutterBottom
               vriant='subtitle1'
@@ -28,7 +28,7 @@ const CommentSection = (post) => {
         </div>
         <div style={{ width: '70%' }}>
           {' '}
-          <Typography style={{ color: 'whitesmoke' }} gutterBottom>
+          <Typography style={{ color: '#e9f1f8' }} gutterBottom>
             write a comment
           </Typography>
           <TextField

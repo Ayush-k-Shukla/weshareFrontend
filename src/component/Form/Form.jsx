@@ -1,5 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { TextField, Button, Typography, Paper } from '@material-ui/core';
+import {
+  TextField,
+  Button,
+  Typography,
+  Paper,
+  Container,
+} from '@material-ui/core';
 
 import FileBase from 'react-file-base64';
 
@@ -81,77 +87,93 @@ const Form = ({ currentId, setCurrentId }) => {
   }
 
   return (
-    <Paper className={classes.paper} elevation={6}>
-      <form
-        autoComplete='off'
-        noValidate
-        className={`${classes.root} ${classes.form}`}
-        onSubmit={handleSubmit}
-      >
-        <Typography variant='h5'>
+    <div style={{ marginTop: '40px', backgroundColor: 'none !important' }}>
+      <Container className={classes.paper} elevation={6}>
+        <Typography
+          variant='h5'
+          style={{
+            color: 'white',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+          width='100%'
+        >
           {currentId ? 'editing' : 'creating'} a blog
         </Typography>
-
-        <TextField
-          name='title'
-          variant='outlined'
-          label='Title'
-          fullWidth
-          style={{ color: 'black !important' }}
-          value={postData.title}
-          onChange={(e) => setPostData({ ...postData, title: e.target.value })}
-        />
-        <TextField
-          name='message'
-          variant='outlined'
-          label='Message'
-          fullWidth
-          value={postData.message}
-          onChange={(e) =>
-            setPostData({ ...postData, message: e.target.value })
-          }
-        />
-        <TextField
-          name='tags'
-          variant='outlined'
-          label='tags'
-          fullWidth
-          value={postData?.tags}
-          onChange={(e) =>
-            setPostData({ ...postData, tags: e.target.value.split(',') })
-          }
-        />
-        <div className={classes.fileInput}>
-          <FileBase
-            type='file'
-            mutiple={false}
-            onDone={({ base64 }) =>
-              setPostData({ ...postData, selectedFile: base64 })
+        <form
+          autoComplete='off'
+          noValidate
+          className={`${classes.root} ${classes.form}`}
+          onSubmit={handleSubmit}
+        >
+          <div style={{ display: 'flex', justifyContent: 'space-around' }}>
+            <TextField
+              name='title'
+              variant='outlined'
+              label='Title'
+              maxRows={6}
+              style={{ color: 'black !important' }}
+              value={postData.title}
+              onChange={(e) =>
+                setPostData({ ...postData, title: e.target.value })
+              }
+            />
+            <TextField
+              name='tags'
+              variant='outlined'
+              label='tags'
+              value={postData?.tags}
+              onChange={(e) =>
+                setPostData({ ...postData, tags: e.target.value.split(',') })
+              }
+            />
+          </div>
+          <TextField
+            name='message'
+            variant='outlined'
+            label='Message'
+            fullWidth
+            multiline
+            rows={12}
+            value={postData.message}
+            onChange={(e) =>
+              setPostData({ ...postData, message: e.target.value })
             }
           />
-        </div>
-        <Button
-          className={classes.buttonSubmit}
-          variant='contained'
-          color='primary'
-          size='large'
-          type='submit'
-          fullWidth
-        >
-          Submit
-        </Button>
-        <Button
-          className={classes.buttonSubmit}
-          variant='contained'
-          color='secondary'
-          size='small'
-          onClick={clearAll}
-          fullWidth
-        >
-          Clear
-        </Button>
-      </form>
-    </Paper>
+
+          <div className={classes.fileInput}>
+            <FileBase
+              type='file'
+              mutiple={false}
+              onDone={({ base64 }) =>
+                setPostData({ ...postData, selectedFile: base64 })
+              }
+            />
+          </div>
+          <Button
+            className={classes.buttonSubmit}
+            variant='contained'
+            color='primary'
+            size='large'
+            type='submit'
+            fullWidth
+          >
+            Submit
+          </Button>
+          <Button
+            className={classes.buttonSubmit}
+            variant='contained'
+            color='secondary'
+            size='small'
+            onClick={clearAll}
+            fullWidth
+          >
+            Clear
+          </Button>
+        </form>
+      </Container>
+    </div>
   );
 };
 
