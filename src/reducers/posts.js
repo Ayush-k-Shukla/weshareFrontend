@@ -21,7 +21,14 @@ const reducers = (state = { isLoading: true, posts: [] }, action) => {
     case 'LIKE':
       return {
         ...state,
-        posts: state.posts.map((post) =>
+        posts: state.posts?.map((post) =>
+          post._id === action.payload._id ? action.payload : post
+        ),
+      };
+    case 'COMMENT':
+      return {
+        ...state,
+        posts: state.posts?.map((post) =>
           post._id === action.payload._id ? action.payload : post
         ),
       };

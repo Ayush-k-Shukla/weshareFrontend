@@ -121,7 +121,7 @@ const PostIndividual = () => {
         </div>
       </div>
 
-      <CommentSection post={post} />
+      <CommentSection post={post.data} />
       <Divider style={{ margin: '20px 0', color: '#044ac5' }} />
       {recommendedPosts?.length && (
         <div
