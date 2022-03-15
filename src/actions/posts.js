@@ -81,3 +81,17 @@ export const likePost = (id) => async (dispatch) => {
     console.log(e);
   }
 };
+
+export const commentPost = (finalComment, id) => async (dispatch) => {
+  try {
+    console.log(`${finalComment} ${id}`);
+    const { data } = await api.commentPost(id, finalComment);
+
+    console.log(data);
+    dispatch({ type: 'COMMENT', payload: data });
+
+    return data.comments;
+  } catch (error) {
+    console.log(error);
+  }
+};

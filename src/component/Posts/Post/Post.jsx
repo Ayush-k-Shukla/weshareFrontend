@@ -88,10 +88,17 @@ const Post = ({ post, setCurrentId }) => {
             style={{ color: 'white' }}
             size='small'
             onClick={() => {
+<<<<<<< HEAD
               // navigate('/create');
               // setCurrentId(post._id);
               editPost();
+=======
+              setCurrentId(post._id);
+              console.log(post);
+              navigate('/create');
+>>>>>>> deployment
             }}
+            title='Edit Post'
           >
             <MoreHorizIcon fontSize='default' />
           </Button>
@@ -123,7 +130,7 @@ const Post = ({ post, setCurrentId }) => {
             style={{ color: '#f9f8f8' }}
           >
             {post.message.length > 50
-              ? `${post.message.substring(0, 50)}...`
+              ? `${post.message.substring(0, 70)}...`
               : post.message}
           </Typography>
         </CardContent>
@@ -138,6 +145,7 @@ const Post = ({ post, setCurrentId }) => {
           onClick={() => {
             dispatch(likePost(post._id));
           }}
+          title='Like Post'
         >
           <Likes />
         </Button>
@@ -147,6 +155,7 @@ const Post = ({ post, setCurrentId }) => {
             size='small'
             color='primary'
             onClick={() => dispatch(deletePost(post._id))}
+            title='Delete Post'
           >
             <DeleteIcon fontSize='small' />
             &nbsp; DELETE &nbsp;

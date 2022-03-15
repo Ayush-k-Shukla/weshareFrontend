@@ -5,6 +5,7 @@ import {
   Typography,
   Paper,
   Container,
+  Fab,
 } from '@material-ui/core';
 
 import FileBase from 'react-file-base64';
@@ -77,7 +78,7 @@ const Form = ({ currentId, setCurrentId }) => {
   }
 
   return (
-    <div style={{ marginTop: '40px', backgroundColor: 'none !important' }}>
+    <div style={{ marginTop: '40px' }}>
       <Container className={classes.paper} elevation={6}>
         <Typography
           variant='h5'
@@ -89,7 +90,7 @@ const Form = ({ currentId, setCurrentId }) => {
           }}
           width='100%'
         >
-          {currentId ? 'editing' : 'creating'} a blog
+          {currentId ? 'Editing' : 'Creating'} a Post
         </Typography>
         <form
           autoComplete='off'
@@ -97,12 +98,18 @@ const Form = ({ currentId, setCurrentId }) => {
           className={`${classes.root} ${classes.form}`}
           onSubmit={handleSubmit}
         >
-          <div style={{ display: 'flex', justifyContent: 'space-around' }}>
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'space-around',
+              width: '100%',
+            }}
+          >
             <TextField
               name='title'
               variant='outlined'
               label='Title'
-              maxRows={6}
+              maxRows={4}
               style={{ color: 'black !important' }}
               value={postData.title}
               onChange={(e) =>
@@ -132,23 +139,11 @@ const Form = ({ currentId, setCurrentId }) => {
             }
           />
 
-          <div className={classes.fileInput}>
-            <FileBase
-              type='file'
-              mutiple={false}
-              onDone={({ base64 }) =>
-                setPostData({ ...postData, selectedFile: base64 })
-              }
-            />
-          </div>
-          <Button
-            className={classes.buttonSubmit}
-            variant='contained'
-            color='primary'
-            size='large'
-            type='submit'
-            fullWidth
+          <div
+            className={classes.fileInput}
+            style={{ display: 'flex', justifyContent: 'space-between' }}
           >
+<<<<<<< HEAD
             Submit
           </Button>
           <Button
@@ -160,6 +155,35 @@ const Form = ({ currentId, setCurrentId }) => {
           >
             Clear
           </Button>
+=======
+            <Fab
+              color='secondary'
+              size='small'
+              component='span'
+              aria-label='add'
+              variant='extended'
+            >
+              <FileBase
+                type='file'
+                mutiple={false}
+                onDone={({ base64 }) =>
+                  setPostData({ ...postData, selectedFile: base64 })
+                }
+              />
+            </Fab>
+            <Button
+              className={classes.buttonSubmit}
+              variant='contained'
+              color='primary'
+              size='large'
+              type='submit'
+              fullWidth
+              style={{ width: '20%' }}
+            >
+              Submit
+            </Button>
+          </div>
+>>>>>>> deployment
         </form>
       </Container>
     </div>

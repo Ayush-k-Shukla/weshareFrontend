@@ -2,7 +2,8 @@ import axios from 'axios';
 
 const API = axios.create({ baseURL: 'http://localhost:4000' });
 
-// * backend hosted at : https://sharewithmebac.herokuapp.com/
+// * backend hosted at : https://sharewithmebac.herokuapp.com
+// * backend hosted at : http://localhost:4000
 //send data to backend if user is logged in
 API.interceptors.request.use((req) => {
   if (localStorage.getItem('profile')) {
@@ -27,6 +28,8 @@ export const updatePost = (newPost, currentId) =>
   axios.patch(`/posts/${currentId}`, newPost);
 export const deletePost = (id) => API.delete(`/posts/${id}`, id);
 export const likePost = (id) => API.patch(`/posts/${id}/likePost`);
+export const commentPost = (id, finalComment) =>
+  API.post(`/posts/${id}/commentPost`, { finalComment });
 
 export const signIn = (formData) => API.post(`/user/signin`, formData);
 export const signUp = (formData) => API.post(`/user/signup`, formData);
