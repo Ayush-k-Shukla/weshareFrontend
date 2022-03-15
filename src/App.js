@@ -4,6 +4,7 @@ import { Box, Container } from '@material-ui/core';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 
 import Form from './component/Form/Form';
+import EditForm from './component/Form/EditForm';
 import Navbar from './component/Navbar/Navbar';
 import Home from './component/Home/Home';
 import Auth from './component/Auth/Auth';
@@ -25,11 +26,12 @@ const App = () => {
   return (
     <BrowserRouter>
       <Navbar />{' '}
-      <Container >
+      <Container>
         {/* rect-router-dom 6 does not support Switch , use Routes */}
         {/* <Suspense fallback={<div>Loading...</div>}> */}
         <Routes>
           <Route path='/posts/:id' exact element={<PostIndividual />} />
+          <Route path='/posts/edit/:id' exact element={<EditForm />} />
 
           <Route path='/' exact element={<Navigate replace to='/posts' />} />
           <Route path='/posts' exact element={<Home />} />

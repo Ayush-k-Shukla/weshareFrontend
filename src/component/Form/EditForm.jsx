@@ -13,16 +13,18 @@ import useStyles from './styles';
 
 import { useDispatch } from 'react-redux';
 // * import middlrware to dispatch from action not from apis
-import { createPost, updatePost } from '../../actions/posts';
+import { updatePost } from '../../actions/posts';
 
 import { useSelector } from 'react-redux';
 
 import { Link } from 'react-router-dom';
 
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
-const Form = ({ currentId, setCurrentId }) => {
+const EditForm = () => {
   const classes = useStyles();
+  const { id } = useParams();
+  const currentId = id;
   const post = useSelector((state) =>
     currentId ? state.posts.posts.find((p) => p._id === currentId) : null
   );
@@ -53,14 +55,10 @@ const Form = ({ currentId, setCurrentId }) => {
     //this prevent default err need to be fixe
     // e.preventDefault();
     if (currentId) {
-      navigate('/create');
       dispatch(
         updatePost(currentId, { ...postData, name: user?.result?.name })
       );
 
-      navigate('/');
-    } else {
-      dispatch(createPost({ ...postData, name: user?.result?.name }, navigate));
       navigate('/');
     }
   };
@@ -151,19 +149,10 @@ const Form = ({ currentId, setCurrentId }) => {
           >
             Submit
           </Button>
-          <Button
-            className={classes.buttonSubmit}
-            variant='contained'
-            color='secondary'
-            size='small'
-            fullWidth
-          >
-            Clear
-          </Button>
         </form>
       </Container>
     </div>
   );
 };
 
-export default Form;
+export default EditForm;

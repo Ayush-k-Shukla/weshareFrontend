@@ -58,6 +58,10 @@ const Post = ({ post, setCurrentId }) => {
   const openPost = () => {
     navigate(`/posts/${post._id}`);
   };
+
+  const editPost = () => {
+    navigate(`/posts/edit/${post._id}`);
+  };
   return (
     <Card
       className={classes.card}
@@ -84,8 +88,9 @@ const Post = ({ post, setCurrentId }) => {
             style={{ color: 'white' }}
             size='small'
             onClick={() => {
-              navigate('/create');
-              setCurrentId(post._id);
+              // navigate('/create');
+              // setCurrentId(post._id);
+              editPost();
             }}
           >
             <MoreHorizIcon fontSize='default' />
