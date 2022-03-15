@@ -23,7 +23,7 @@ const PostIndividual = () => {
   const { post, isLoading, posts } = useSelector((state) => state.posts);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  console.log(posts);
+  // console.log(posts);
   const classes = useStyles();
   const { id } = useParams();
 
@@ -36,7 +36,7 @@ const PostIndividual = () => {
 
   useEffect(() => {
     if (post) {
-      console.log(post);
+      // console.log(post);
       dispatch(
         getPostsBySearch({ search: 'none', tags: post?.data?.tags.join(',') })
       );

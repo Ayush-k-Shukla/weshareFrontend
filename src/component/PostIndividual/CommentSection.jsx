@@ -14,13 +14,17 @@ const CommentSection = (post) => {
   const dispatch = useDispatch();
   const user = JSON.parse(localStorage.getItem('profile'));
   // console.log(post);
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     const finalComment = `${user.result.name}: ${comment}`;
-    dispatch(commentPost(finalComment, post.post._id));
+    const newComments = await dispatch(
+      commentPost(finalComment, post.post._id)
+    );
+    setComment('');
+    setComments(newComments);
   };
 
   return (
-    <div style={{ backgroundColor: '#314054', padding: '10px' }}>
+    <div style={{ backgroundColor: '#314054', padding: '10px', width: '100%' }}>
       <div className={classes.commentsOuterContainer}>
         <div className={classes.commentsInnerContainer}>
           <Typography style={{ color: '#e9f1f8' }} gutterBottom>
@@ -38,14 +42,14 @@ const CommentSection = (post) => {
           ))}
         </div>
         {user?.result?.name && (
-          <div style={{ width: '70%' }}>
+          <div>
             {' '}
             <Typography style={{ color: '#e9f1f8' }} gutterBottom>
               write a comment
             </Typography>
             <TextField
               fullWidth
-              rows={4}
+              rows={1}
               label='comment'
               variant='outlined'
               multiline

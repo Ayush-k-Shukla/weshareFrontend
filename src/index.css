@@ -6,6 +6,7 @@ body {
 
 .MuiInputBase-input {
   font-size: small !important;
+  color: #909296 !important;
 }
 
 .WAMuiChipInput-standard-18 {
@@ -16,10 +17,18 @@ body {
 .mainPage {
   padding: 40px 60px;
 }
-.MuiTextField-root {
+/* .MuiTextField-root {
   background-color: #314054;
-}
-//for add blog form
-..MuiTextField-root {
+} */
+
+.MuiTextField-root {
   width: 100%;
+}
+
+.MuiInputLabel-root {
+  color: #bbbcbe !important;
+}
+.MuiTypography-h5,
+.MuiButton-label {
+  color: gainsboro !important;
 }

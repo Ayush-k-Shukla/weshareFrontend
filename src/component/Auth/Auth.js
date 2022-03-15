@@ -86,7 +86,9 @@ const Auth = () => {
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
         </Avatar>
-        <Typography variant='h5'>{isSignup ? 'SignUP' : 'SignIN'}</Typography>
+        <Typography variant='h5' style={{ color: '#f0f1f0 !important' }}>
+          {isSignup ? 'SignUP' : 'SignIN'}
+        </Typography>
         <form className={classes.form} onSubmit={handleSubmit} half={true}>
           <Grid container spacing={2}>
             {isSignup && (
@@ -133,7 +135,7 @@ const Auth = () => {
             type='submit'
             fullWidth
             variant='contained'
-            color='primary'
+            style={{ backgroundColor: '#3f51b5' }}
             className={classes.submit}
           >
             {isSignup ? 'SignUp' : 'SignIn'}
@@ -149,8 +151,9 @@ const Auth = () => {
                 disabled={renderProps.disabled}
                 startIcon={<Icon />}
                 variant='contained'
+                style={{ backgroundColor: '#3f51b5' }}
               >
-                <Typography style={{ fontWeight: 600, color: 'blue' }}>
+                <Typography style={{ fontWeight: 600 }}>
                   Google Sign In
                 </Typography>
               </Button>
