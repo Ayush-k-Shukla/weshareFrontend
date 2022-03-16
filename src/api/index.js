@@ -11,6 +11,7 @@ API.interceptors.request.use((req) => {
       JSON.parse(localStorage.getItem('profile')).token
     }`;
   }
+  // console.log(req.headers.authorization.split(' ')[1]);
   return req;
 });
 
@@ -25,7 +26,7 @@ export const fetchPostsBySearch = (searchQuery) =>
 
 export const createPost = (newPost) => API.post('/posts', newPost);
 export const updatePost = (newPost, currentId) =>
-  axios.patch(`/posts/${currentId}`, newPost);
+  API.patch(`/posts/${currentId}`, newPost);
 export const deletePost = (id) => API.delete(`/posts/${id}`, id);
 export const likePost = (id) => API.patch(`/posts/${id}/likePost`);
 export const commentPost = (id, finalComment) =>

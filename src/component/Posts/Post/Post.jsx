@@ -88,15 +88,7 @@ const Post = ({ post, setCurrentId }) => {
             style={{ color: 'white' }}
             size='small'
             onClick={() => {
-<<<<<<< HEAD
-              // navigate('/create');
-              // setCurrentId(post._id);
               editPost();
-=======
-              setCurrentId(post._id);
-              console.log(post);
-              navigate('/create');
->>>>>>> deployment
             }}
             title='Edit Post'
           >

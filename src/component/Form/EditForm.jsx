@@ -13,7 +13,7 @@ import useStyles from './styles';
 
 import { useDispatch } from 'react-redux';
 // * import middlrware to dispatch from action not from apis
-import { updatePost } from '../../actions/posts';
+import { updatePost } from '../../actions/posts.js';
 
 import { useSelector } from 'react-redux';
 
@@ -53,14 +53,12 @@ const EditForm = () => {
     //if use prevent default "react-error-overlay": "6.0.9", this is rquired
 
     //this prevent default err need to be fixe
-    // e.preventDefault();
-    if (currentId) {
-      dispatch(
-        updatePost(currentId, { ...postData, name: user?.result?.name })
-      );
+    e.preventDefault();
+    console.log(postData);
+    console.log(currentId);
+    dispatch(updatePost(currentId, { ...postData, name: user?.result?.name }));
 
-      navigate('/');
-    }
+    navigate('/');
   };
 
   if (!user?.result?.name) {

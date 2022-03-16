@@ -14,7 +14,7 @@ import useStyles from './styles';
 
 import { useDispatch } from 'react-redux';
 // * import middlrware to dispatch from action not from apis
-import { createPost, updatePost } from '../../actions/posts';
+import { createPost } from '../../actions/posts';
 
 import { useSelector } from 'react-redux';
 
@@ -53,17 +53,9 @@ const Form = ({ currentId, setCurrentId }) => {
 
     //this prevent default err need to be fixe
     // e.preventDefault();
-    if (currentId) {
-      navigate('/create');
-      dispatch(
-        updatePost(currentId, { ...postData, name: user?.result?.name })
-      );
 
-      navigate('/');
-    } else {
-      dispatch(createPost({ ...postData, name: user?.result?.name }, navigate));
-      navigate('/');
-    }
+    dispatch(createPost({ ...postData, name: user?.result?.name }, navigate));
+    navigate('/');
   };
 
   if (!user?.result?.name) {
@@ -143,19 +135,6 @@ const Form = ({ currentId, setCurrentId }) => {
             className={classes.fileInput}
             style={{ display: 'flex', justifyContent: 'space-between' }}
           >
-<<<<<<< HEAD
-            Submit
-          </Button>
-          <Button
-            className={classes.buttonSubmit}
-            variant='contained'
-            color='secondary'
-            size='small'
-            fullWidth
-          >
-            Clear
-          </Button>
-=======
             <Fab
               color='secondary'
               size='small'
@@ -183,7 +162,6 @@ const Form = ({ currentId, setCurrentId }) => {
               Submit
             </Button>
           </div>
->>>>>>> deployment
         </form>
       </Container>
     </div>
