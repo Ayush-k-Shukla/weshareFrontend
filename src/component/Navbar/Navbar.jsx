@@ -112,13 +112,13 @@ const Navbar = () => {
                 vertical: 'bottom',
                 horizontal: 'right',
               }}
-              keepMounted
               transformOrigin={{
                 vertical: 'top',
                 horizontal: 'right',
               }}
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
+              // style={{ backgroundColor: '#191b3b' }}
             >
               <MenuItem key='Logout' onClick={handleLogout}>
                 <Typography textAlign='center'>Logout</Typography>
@@ -138,8 +138,8 @@ const Navbar = () => {
             variant='contained'
             style={{ backgroundColor: '#6d63fe' }}
             color='primary'
-            to='/auth'
             component={Link}
+            to='/auth'
           >
             SignIn
           </Button>

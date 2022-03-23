@@ -63,7 +63,6 @@ const Home = () => {
   };
   return (
     <div style={{ padding: '40px 14px' }}>
-      {/* <div> */}
       <Container className={classes.appBarSearch}>
         <Container
           style={{
@@ -74,7 +73,7 @@ const Home = () => {
         >
           <input
             name='search'
-            label='Search Title'
+            label='Search by Title'
             onKeyPress={handleSearchKeyPress}
             value={search}
             placeholder='Search title....'
@@ -94,7 +93,7 @@ const Home = () => {
             className={classes.searchClass}
             value={tagSearch}
             onAdd={handleTagAdd}
-            placeholder='Search tags...'
+            placeholder='Search by tags...'
             onDelete={handleTagDelete}
             disableUnderline={true}
             style={{
@@ -112,7 +111,6 @@ const Home = () => {
 
         <Button
           onClick={searchPost}
-          // className={classes.searchButton}
           color='primary'
           variant='contained'
           style={{
@@ -125,7 +123,6 @@ const Home = () => {
           Search
         </Button>
       </Container>
-      {/* </div> */}
       <Grow in>
         <Container maxWidth='xl'>
           <Grid item xs={12} sm={6} md={12}>

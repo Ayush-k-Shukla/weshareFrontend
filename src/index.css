@@ -9,9 +9,14 @@ body {
   color: #909296 !important;
 }
 
-.WAMuiChipInput-standard-18 {
+.WAMuiChipInput-standard-18,
+.WAMuiChipInput-inputRoot-58 {
   color: white !important;
-  padding: 2px 4px;
+  padding: 4px 4px;
+}
+.WAMuiChipInput-standard-66 {
+  padding: 4px 4px;
+  color: white !important;
 }
 
 .mainPage {
