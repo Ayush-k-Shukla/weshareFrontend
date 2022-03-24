@@ -146,6 +146,7 @@ const Post = ({ post, setCurrentId }) => {
           <Button
             size='small'
             color='primary'
+            style={{ color: '#044ac5' }}
             onClick={() => dispatch(deletePost(post._id))}
             title='Delete Post'
           >

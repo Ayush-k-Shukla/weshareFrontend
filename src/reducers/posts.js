@@ -14,7 +14,7 @@ const reducers = (state = { isLoading: true, posts: [] }, action) => {
     case 'FETCH_ONE':
       return { ...state, post: action.payload };
     case 'FETCH_BY_SEARCH':
-      return { ...state, posts: action.payload };
+      return { ...state, posts: action.payload.data.data };
     case 'CREATE':
       return [...state, action.payload];
     case 'UPDATE':

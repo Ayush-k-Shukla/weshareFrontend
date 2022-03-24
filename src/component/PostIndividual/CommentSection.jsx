@@ -42,22 +42,23 @@ const CommentSection = (post) => {
           ))}
         </div>
         {user?.result?.name && (
-          <div>
+          <div style={{ display: 'flex', alignContent: 'flex-start' }}>
             {' '}
-            <Typography style={{ color: '#e9f1f8' }} gutterBottom>
-              write a comment
-            </Typography>
             <TextField
               fullWidth
-              rows={1}
               label='comment'
               variant='outlined'
               multiline
+              width='70%'
               value={comment}
               onChange={(e) => setComment(e.target.value)}
             />
             <Button
-              style={{ marginTop: '10px' }}
+              style={{
+                margin: '5px 5px 5px 5px',
+                width: '20%',
+                backgroundColor: 'rgb(109, 99, 254)',
+              }}
               fullWidth
               disabled={!comment}
               varianr='contained'

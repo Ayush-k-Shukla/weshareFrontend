@@ -33,7 +33,6 @@ body {
 .MuiInputLabel-root {
   color: #bbbcbe !important;
 }
-.MuiTypography-h5,
-.MuiButton-label {
+.MuiTypography-h5 {
   color: gainsboro !important;
 }

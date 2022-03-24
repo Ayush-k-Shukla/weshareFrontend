@@ -8,11 +8,11 @@ import { useSelector } from 'react-redux';
 
 const Posts = ({ setCurrentId }) => {
   const data = useSelector((state) => state.posts);
-  console.log(data);
   const posts = data.posts;
   const isLoading = data.isLoading;
+  console.log(data);
   const classes = useStyles();
-  if (!posts?.length && !isLoading) return 'no posts';
+  if (!isLoading && !posts?.length) return 'no posts';
 
   return isLoading ? (
     <>
