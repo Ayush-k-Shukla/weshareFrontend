@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import Posts from '../Posts/Posts';
-import Form from '../Form/Form';
+import React, { useEffect, useState, lazy, Suspense } from 'react';
+// import Posts from '../Posts/Posts';
+// import Form from '../Form/Form';
 import useStyles from './styles';
 import {
   Paper,
@@ -18,6 +18,10 @@ import ChipInput from 'material-ui-chip-input';
 
 import Paginate from '../Pagination/Pagination';
 import { TextField } from '@mui/material';
+
+import Loader from '../Loader/Loader';
+const Posts = lazy(() => import('../Posts/Posts'));
+const Form = lazy(() => import('../Form/Form'));
 
 const useQuery = () => {
   return new URLSearchParams(useLocation().search);
@@ -62,6 +66,7 @@ const Home = () => {
     }
   };
   return (
+    // <Suspense fallback={<Loader />}>
     <div style={{ padding: '40px 14px' }}>
       <Container className={classes.appBarSearch}>
         <Container
@@ -126,7 +131,9 @@ const Home = () => {
       <Grow in>
         <Container maxWidth='xl'>
           <Grid item xs={12} sm={6} md={12}>
+            {/* <Suspense fallback={<Loader />}> */}
             <Posts setCurrentId={setCurrentId} />
+            {/* </Suspense> */}
           </Grid>
           {/* </Grid> */}
           <div
@@ -144,12 +151,15 @@ const Home = () => {
               }}
               className={classes.pagination}
             >
+              {/* <Suspense fallback={<Loader />}> */}
               <Paginate page={page} />
+              {/* </Suspense> */}
             </Paper>
           </div>
         </Container>
       </Grow>
     </div>
+    // </Suspense>
   );
 };
 
