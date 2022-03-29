@@ -13,7 +13,7 @@ import {
 import useStyles from './styles.js';
 import logo from '../../images/logo.svg';
 import { Link } from 'react-router-dom';
-
+// import Avatar from 'react-avatar';
 import { useDispatch } from 'react-redux';
 
 import { useNavigate, useLocation } from 'react-router-dom';
@@ -94,6 +94,11 @@ const Navbar = () => {
           <div className={classes.profile}>
             <Tooltip title='Open settings'>
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                {/* <Avatar
+                  googleId='111026565936228186204'
+                  size='50'
+                  round={true}
+                /> */}
                 <Avatar
                   className={classes.Avatar}
                   alt={user?.result?.name}

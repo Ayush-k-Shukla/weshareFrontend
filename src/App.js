@@ -12,7 +12,7 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import dotenv from 'dotenv';
 import './index.css';
 import Loader from './component/Loader/Loader';
-
+import { Toaster } from 'react-hot-toast';
 dotenv.config();
 const PostIndividual = lazy(() =>
   import('./component/PostIndividual/PostIndividual')
@@ -35,6 +35,9 @@ const App = () => {
         {/* <Suspense fallback={<Loader />}>
           <Navbar />
         </Suspense> */}
+        <div>
+          <Toaster />
+        </div>
         <Navbar />
         <Container>
           {/* rect-router-dom 6 does not support Switch , use Routes */}

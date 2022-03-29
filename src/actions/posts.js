@@ -1,4 +1,5 @@
 import * as api from '../api/index.js';
+import { toast } from 'react-hot-toast';
 
 //action creaters
 
@@ -91,9 +92,26 @@ export const commentPost = (finalComment, id) => async (dispatch) => {
 
     console.log(data);
     dispatch({ type: 'COMMENT', payload: data });
-
+    toast.success('Comment posted successfully', {
+      icon: '👏',
+      style: {
+        borderRadius: '10px',
+        background: '#333',
+        color: '#fff',
+        fontFamily: 'revert',
+      },
+    });
     return data.comments;
   } catch (error) {
+    toast.err(`Comment can't be posted`, {
+      icon: '👏',
+      style: {
+        borderRadius: '10px',
+        background: '#333',
+        color: '#fff',
+        fontFamily: 'revert',
+      },
+    });
     console.log(error);
   }
 };

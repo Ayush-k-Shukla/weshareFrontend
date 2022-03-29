@@ -2,6 +2,7 @@ body {
   margin: 0%;
   background-color: #0a0b1a;
   background: #0a0b1a;
+  font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
 }
 
 .MuiInputBase-input {
