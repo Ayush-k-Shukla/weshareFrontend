@@ -1,7 +1,6 @@
 .main {
-  /* background: linear-gradient(to right, #edc4b3, #cd9777, #774936); */
   height: 80vh;
-  /* width: 100vw; */
+
   display: flex;
   justify-content: center;
   align-items: center;
@@ -33,7 +32,7 @@
   height: 25px;
   z-index: -1;
   animation: anim 2s infinite linear;
-  animation-delay: calc(-0.3s * var(--i));
+
   transform: translateY(5px);
   margin: 0.2em;
 }

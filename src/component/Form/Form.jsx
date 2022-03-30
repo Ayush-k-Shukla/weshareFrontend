@@ -9,6 +9,7 @@ import {
 } from '@material-ui/core';
 
 import FileBase from 'react-file-base64';
+import SendIcon from '@mui/icons-material/Send';
 
 import useStyles from './styles';
 
@@ -112,6 +113,7 @@ const Form = ({ currentId, setCurrentId }) => {
               name='tags'
               variant='outlined'
               label='tags'
+              placeholder='enter comment seprated by comma'
               value={postData?.tags}
               onChange={(e) =>
                 setPostData({ ...postData, tags: e.target.value.split(',') })
@@ -158,6 +160,7 @@ const Form = ({ currentId, setCurrentId }) => {
               type='submit'
               fullWidth
               style={{ width: '20%' }}
+              endIcon={<SendIcon />}
             >
               Submit
             </Button>

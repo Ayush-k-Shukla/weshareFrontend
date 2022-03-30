@@ -51,6 +51,14 @@ export const createPost = (post, navigate) => async (dispatch) => {
     navigate(`/posts/${data._id}`);
     dispatch({ type: 'CREATE', data });
     dispatch({ type: 'END_LOADING' });
+    toast.success('Post created successfully!', {
+      style: {
+        borderRadius: '10px',
+        background: '#333',
+        color: '#fff',
+        fontFamily: 'revert',
+      },
+    });
   } catch (e) {
     console.log(e);
   }
@@ -62,6 +70,14 @@ export const updatePost = (id, post) => async (dispatch) => {
     const { data } = await api.updatePost(post, id);
     console.log(data);
     dispatch({ type: 'UPDATE', payload: data });
+    toast.success('Post updated successfully!', {
+      style: {
+        borderRadius: '10px',
+        background: '#333',
+        color: '#fff',
+        fontFamily: 'revert',
+      },
+    });
   } catch (e) {
     console.log(e);
   }
@@ -71,6 +87,14 @@ export const deletePost = (id) => async (dispatch) => {
   try {
     await api.deletePost(id);
     dispatch({ type: 'DELETE', payload: id });
+    toast.success('Post deleted successfully!', {
+      style: {
+        borderRadius: '10px',
+        background: '#333',
+        color: '#fff',
+        fontFamily: 'revert',
+      },
+    });
   } catch (e) {
     console.log(e);
   }
@@ -80,6 +104,15 @@ export const likePost = (id) => async (dispatch) => {
   try {
     const { data } = await api.likePost(id);
     dispatch({ type: 'LIKE', payload: data });
+    toast.success('Post liked', {
+      icon: '👏',
+      style: {
+        borderRadius: '10px',
+        background: '#333',
+        color: '#fff',
+        fontFamily: 'revert',
+      },
+    });
   } catch (e) {
     console.log(e);
   }

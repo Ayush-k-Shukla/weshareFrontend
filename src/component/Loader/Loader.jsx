@@ -4,10 +4,10 @@ const Loader = () => {
   return (
     <div className='main'>
       <div className='loader'>
-        <div style={{ style: '--i:1' }}></div>
-        <div style={{ style: '--i:2' }}></div>
-        <div style={{ style: '--i:3' }}></div>
-        <div style={{ style: '--i:4' }}></div>
+        <div style={{ animationDelay: '-0.3s' }}></div>
+        <div style={{ animationDelay: '-0.6s' }}></div>
+        <div style={{ animationDelay: '-0.9s' }}></div>
+        <div style={{ animationDelay: '-0.12s' }}></div>
       </div>
     </div>
   );

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 import { Typography, TextField, Button, IconButton } from '@material-ui/core';
 import SendIcon from '@mui/icons-material/Send';
-import InputIcon from '@mui/icons-material/Input';
+import LoginIcon from '@mui/icons-material/Login';
 import { useDispatch } from 'react-redux';
 
 import { commentPost } from '../../actions/posts.js';
@@ -112,6 +112,7 @@ const CommentSection = (post) => {
                 margin: '5px 5px 5px 5px',
                 width: '20%',
                 backgroundColor: 'rgb(109, 99, 254)',
+                fontWeight: '600',
               }}
               fullWidth
               disabled={!comment}
@@ -132,10 +133,10 @@ const CommentSection = (post) => {
               }}
             >
               <h2 style={{ color: '#e9f1f8', fontSize: '1.2em' }}>
-                Login to Comment{' '}
+                Login to Comment
                 <a href='/auth'>
                   <IconButton aria-label='delete'>
-                    <InputIcon color='success' />
+                    <LoginIcon color='success' />
                   </IconButton>
                 </a>
               </h2>

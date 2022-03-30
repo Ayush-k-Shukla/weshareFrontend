@@ -135,7 +135,11 @@ const Auth = () => {
             type='submit'
             fullWidth
             variant='contained'
-            style={{ backgroundColor: '#3f51b5' }}
+            style={{
+              backgroundColor: '#3f51b5',
+              color: 'yellowgreen',
+              fontWeight: 600,
+            }}
             className={classes.submit}
           >
             {isSignup ? 'SignUp' : 'SignIn'}
@@ -151,7 +155,7 @@ const Auth = () => {
                 disabled={renderProps.disabled}
                 startIcon={<Icon />}
                 variant='contained'
-                style={{ backgroundColor: '#3f51b5' }}
+                style={{ backgroundColor: '#3f51b5', color: 'yellowgreen' }}
               >
                 <Typography style={{ fontWeight: 600 }}>
                   Google Sign In
@@ -164,7 +168,7 @@ const Auth = () => {
           />
           <Grid container justify='flex-end'>
             <Grid item>
-              <Button onClick={switchMode} variant='body-2'>
+              <Button onClick={switchMode} color='primary'>
                 {isSignup
                   ? 'Already have an account? Sign In'
                   : `Don't have an account?Sign Up`}

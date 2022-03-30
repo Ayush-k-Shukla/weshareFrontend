@@ -10,8 +10,10 @@ import {
   Menu,
   Tooltip,
 } from '@material-ui/core';
+import LoginIcon from '@mui/icons-material/Login';
 import useStyles from './styles.js';
 import logo from '../../images/logo.svg';
+import { toast } from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 // import Avatar from 'react-avatar';
 import { useDispatch } from 'react-redux';
@@ -31,6 +33,14 @@ const Navbar = () => {
   const handleLogout = () => {
     dispatch({ type: 'LOGOUT' });
     navigate('/');
+    toast.success('User logged out Successfully!', {
+      style: {
+        borderRadius: '10px',
+        background: '#333',
+        color: '#fff',
+        fontFamily: 'revert',
+      },
+    });
     setUser(null);
   };
 
@@ -93,7 +103,7 @@ const Navbar = () => {
         {user ? (
           <div className={classes.profile}>
             <Tooltip title='Open settings'>
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+              <IconButton onClick={handleOpenUserMenu}>
                 {/* <Avatar
                   googleId='111026565936228186204'
                   size='50'
@@ -113,14 +123,14 @@ const Navbar = () => {
               sx={{ mt: '60px' }}
               id='menu-appbar'
               anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'right',
-              }}
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
+              // anchorOrigin={{
+              //   vertical: 'bottom',
+              //   horizontal: 'right',
+              // }}
+              // transformOrigin={{
+              //   vertical: 'top',
+              //   horizontal: 'right',
+              // }}
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
               // style={{ backgroundColor: '#191b3b' }}
@@ -131,11 +141,6 @@ const Navbar = () => {
               <MenuItem key='create' onClick={() => navigate('/create')}>
                 <Typography textAlign='center'>CreatePost</Typography>
               </MenuItem>
-              {/* {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleLogout}>
-                  <Typography textAlign='center'>{setting}</Typography>
-                </MenuItem>
-              ))} */}
             </Menu>
           </div>
         ) : (
@@ -145,6 +150,7 @@ const Navbar = () => {
             color='primary'
             component={Link}
             to='/auth'
+            endIcon={<LoginIcon color='success' />}
           >
             SignIn
           </Button>

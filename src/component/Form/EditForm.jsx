@@ -6,7 +6,7 @@ import {
   Paper,
   Container,
 } from '@material-ui/core';
-
+import SendIcon from '@mui/icons-material/Send';
 import FileBase from 'react-file-base64';
 
 import useStyles from './styles';
@@ -41,7 +41,6 @@ const EditForm = () => {
   const user = JSON.parse(localStorage.getItem('profile'));
 
   useEffect(() => {
-
     // console.log(`cid : ${currentId}`);
 
     if (post) setPostData(post);
@@ -143,6 +142,7 @@ const EditForm = () => {
             size='large'
             type='submit'
             fullWidth
+            endIcon={<SendIcon />}
           >
             Submit
           </Button>

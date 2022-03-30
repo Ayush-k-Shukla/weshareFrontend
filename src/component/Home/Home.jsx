@@ -10,6 +10,7 @@ import {
   AppBar,
   Button,
 } from '@material-ui/core';
+import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import { useDispatch } from 'react-redux';
 import { getPosts, getPostsBySearch } from '../../actions/posts';
 
@@ -124,6 +125,7 @@ const Home = () => {
             borderRadius: '10px',
             textTransform: 'none',
           }}
+          endIcon={<SearchOutlinedIcon color='success' />}
         >
           Search
         </Button>

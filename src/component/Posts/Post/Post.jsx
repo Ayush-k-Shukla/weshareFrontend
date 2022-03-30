@@ -9,7 +9,7 @@ import {
   Button,
   Typography,
 } from '@material-ui/core';
-import { ButtonBase } from '@mui/material';
+import EditRoadTwoToneIcon from '@mui/icons-material/EditRoadTwoTone';
 import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
 import DeleteIcon from '@material-ui/icons/Delete';
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
@@ -91,8 +91,9 @@ const Post = ({ post, setCurrentId }) => {
               editPost();
             }}
             title='Edit Post'
+            endIcon={<EditRoadTwoToneIcon sx={{ fontSize: 40 }} />}
           >
-            <MoreHorizIcon fontSize='default' />
+            {/* <MoreHorizIcon fontSize='default' /> */}
           </Button>
         </div>
       )}
