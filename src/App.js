@@ -22,6 +22,7 @@ const Form = lazy(() => import('./component/Form/Form'));
 const Auth = lazy(() => import('./component/Auth/Auth'));
 const EditForm = lazy(() => import('./component/Form/EditForm'));
 const Navbar = lazy(() => import('./component/Navbar/Navbar'));
+const Editor = lazy(() => import('./component/Editor/Editor'));
 
 const App = () => {
   //http://localhost:4000, add this also as proxy
@@ -44,6 +45,7 @@ const App = () => {
           {/* <Suspense fallback={<div>Loading...</div>}> */}
           <Routes>
             <Route path='/posts/:id' exact element={<PostIndividual />} />
+            <Route path='/editor' exact element={<Editor />} />
             <Route path='/posts/edit/:id' exact element={<EditForm />} />
 
             <Route path='/' exact element={<Navigate replace to='/posts' />} />
