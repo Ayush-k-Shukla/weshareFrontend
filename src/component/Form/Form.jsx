@@ -22,6 +22,9 @@ import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import { useNavigate } from 'react-router-dom';
+import { EditorState, convertToRaw } from 'draft-js';
+import draftToHtml from 'draftjs-to-html';
+import Editor from '../Editor/Editor';
 
 const Form = ({ currentId, setCurrentId }) => {
   const classes = useStyles();
@@ -30,6 +33,7 @@ const Form = ({ currentId, setCurrentId }) => {
   );
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [editorState, setEditorState] = useState(EditorState.createEmpty());
   const [postData, setPostData] = useState({
     title: '',
     message: '',
@@ -41,8 +45,7 @@ const Form = ({ currentId, setCurrentId }) => {
   const user = JSON.parse(localStorage.getItem('profile'));
 
   useEffect(() => {
-    //err ;; post dat not coming fix this and post also nu;l
-    // console.log(post);
+    //err ;; post dat not coming fix this and post also null
     // console.log(`cid : ${currentId}`);
 
     if (post) setPostData(post);
@@ -50,11 +53,15 @@ const Form = ({ currentId, setCurrentId }) => {
   }, [post]);
 
   const handleSubmit = async (e) => {
-    //if use prevent default "react-error-overlay": "6.0.9", this is rquired
-
     //this prevent default err need to be fixe
     // e.preventDefault();
-
+    // setPostData({
+    //   ...postData,
+    //   message: draftToHtml(convertToRaw(editorState.getCurrentContent())),
+    // });
+    // setPostData({ ...postData, selectedFile: imageUrl });
+    // console.log(postData);
+    //!commented for test purpose
     dispatch(createPost({ ...postData, name: user?.result?.name }, navigate));
     navigate('/');
   };
@@ -85,6 +92,7 @@ const Form = ({ currentId, setCurrentId }) => {
         >
           {currentId ? 'Editing' : 'Creating'} a Post
         </Typography>
+
         <form
           autoComplete='off'
           noValidate
@@ -120,7 +128,8 @@ const Form = ({ currentId, setCurrentId }) => {
               }
             />
           </div>
-          <TextField
+
+          {/* <TextField
             name='message'
             variant='outlined'
             label='Message'
@@ -131,8 +140,9 @@ const Form = ({ currentId, setCurrentId }) => {
             onChange={(e) =>
               setPostData({ ...postData, message: e.target.value })
             }
-          />
+          /> */}
 
+          <Editor editorState={editorState} setEditorState={setEditorState} />
           <div
             className={classes.fileInput}
             style={{ display: 'flex', justifyContent: 'space-between' }}

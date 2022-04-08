@@ -6,17 +6,29 @@ import ReactHtmlParser from 'react-html-parser';
 import { EditorState, convertToRaw } from 'draft-js';
 import './Editor.css';
 import axios from 'axios';
-const EditorComponent = () => {
-  const [editorState, setEditorState] = useState('');
-
+const EditorComponent = ({ editorState, setEditorState }) => {
+  //!not working properly but working in integration with the form
+  const [base64, setBase64] = useState('');
+  setEditorState(EditorState.createEmpty());
   useEffect(() => {
-    // const editorHtmlString = draftToHtml(
-    //   convertToRaw(editorState.getCurrentContent())
-    // );
-    // console.log(editorState.getCurrentContent());
+    const editorHtmlString = draftToHtml(
+      convertToRaw(editorState.getCurrentContent())
+    );
+    console.log(editorHtmlString);
+    // console.log(editorState);
   }, [editorState]);
 
-  const uploadFile = async (file) => {};
+  const getFileBase64 = (file, callback) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => callback(reader.result);
+  };
+
+  const uploadFile = async (file) => {
+    return new Promise((resolve, reject) =>
+      getFileBase64(file, (data) => resolve({ data: { link: data } }))
+    );
+  };
 
   return (
     <div className='maineditor'>
@@ -36,18 +48,20 @@ const EditorComponent = () => {
             ],
           },
           image: {
+            uploadEnabled: true,
             uploadCallback: uploadFile,
             previewImage: true,
           },
         }}
         onEditorStateChange={(editorState) => setEditorState(editorState)}
       ></Editor>
-      <h1>Preview</h1>
-      <textarea
+      <div></div>
+      <div> {ReactHtmlParser(``)} </div>;
+      {/* <textarea
         value={
           ' ' || draftToHtml(convertToRaw(editorState.getCurrentContent()))
         }
-      ></textarea>
+      ></textarea> */}
     </div>
   );
 };
