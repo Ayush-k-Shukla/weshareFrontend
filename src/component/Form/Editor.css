@@ -1,7 +1,21 @@
+/* need to fix editor style */
 .editor-toolbar {
   max-width: 100%;
   margin: 0 auto;
   border: 2px solid rgb(236, 124, 45);
+}
+.rdw-option-active,
+.rdw-option-wrapper:hover {
+  background: rgb(236, 124, 45);
+  box-shadow: 1px 1px 0 rgb(236, 124, 45);
+}
+.rdw-dropdown-optionwrapper {
+  width: max-content;
+}
+.rdw-dropdownoption-default {
+  padding: 5px;
+  border: 1px solid rgb(100, 100, 100);
+  border-bottom: none;
 }
 .editor-wrapper {
   margin: auto;

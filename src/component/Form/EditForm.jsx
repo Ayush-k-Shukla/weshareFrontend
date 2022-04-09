@@ -61,10 +61,17 @@ const EditForm = () => {
 
   if (!user?.result?.name) {
     return (
-      <Paper className={classes.paper}>
+      <Paper
+        className={classes.paper}
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          marginTop: '10%',
+        }}
+      >
         <Typography variant='h6' align='center'>
-          Please <Link to='/auth'>signin</Link> in to create post and like
-          others post
+          Please <Link to='/auth'>signin</Link> in to create post
         </Typography>
       </Paper>
     );

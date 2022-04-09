@@ -24,6 +24,10 @@ const EditForm = lazy(() => import('./component/Form/EditForm'));
 const Navbar = lazy(() => import('./component/Navbar/Navbar'));
 const Editor = lazy(() => import('./component/Editor/Editor'));
 
+const DummyIndividual = lazy(() =>
+  import('./component/PostIndividual/DummyIndividual')
+);
+
 const App = () => {
   //http://localhost:4000, add this also as proxy
   const user = JSON.parse(localStorage.getItem('profile'));
@@ -44,7 +48,7 @@ const App = () => {
           {/* rect-router-dom 6 does not support Switch , use Routes */}
           {/* <Suspense fallback={<div>Loading...</div>}> */}
           <Routes>
-            <Route path='/posts/:id' exact element={<PostIndividual />} />
+            <Route path='/posts/:id' exact element={<DummyIndividual />} />
             <Route path='/editor' exact element={<Editor />} />
             <Route path='/posts/edit/:id' exact element={<EditForm />} />
 
@@ -53,6 +57,7 @@ const App = () => {
             <Route path='/posts/search' exact element={<Home />} />
 
             <Route path='/create' exact element={<Form />} />
+            <Route path='/dummycheck' exact element={<DummyIndividual />} />
             <Route
               path='/auth'
               exact

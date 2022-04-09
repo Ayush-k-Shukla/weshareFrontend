@@ -114,7 +114,7 @@ const Post = ({ post, setCurrentId }) => {
         >
           {post && post.title}
         </Typography>
-        <CardContent>
+        {/* <CardContent>
           <Typography
             className={classes.title}
             variant='body2'
@@ -126,7 +126,7 @@ const Post = ({ post, setCurrentId }) => {
               ? `${post.message.substring(0, 70)}...`
               : post.message}
           </Typography>
-        </CardContent>
+        </CardContent> */}
       </div>
 
       {/* </ButtonBase> */}

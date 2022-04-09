@@ -24,7 +24,11 @@ import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { EditorState, convertToRaw } from 'draft-js';
 import draftToHtml from 'draftjs-to-html';
-import Editor from '../Editor/Editor';
+
+import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
+import { Editor } from 'react-draft-wysiwyg';
+
+import './Editor.css';
 
 const Form = ({ currentId, setCurrentId }) => {
   const classes = useStyles();
@@ -45,22 +49,29 @@ const Form = ({ currentId, setCurrentId }) => {
   const user = JSON.parse(localStorage.getItem('profile'));
 
   useEffect(() => {
-    //err ;; post dat not coming fix this and post also null
-    // console.log(`cid : ${currentId}`);
-
     if (post) setPostData(post);
     // console.log(postData);
+    console.log(draftToHtml(convertToRaw(editorState.getCurrentContent())));
   }, [post]);
+  const getFileBase64 = (file, callback) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => callback(reader.result);
+  };
+
+  const uploadFile = async (file) => {
+    return new Promise((resolve, reject) =>
+      getFileBase64(file, (data) => resolve({ data: { link: data } }))
+    );
+  };
 
   const handleSubmit = async (e) => {
     //this prevent default err need to be fixe
-    // e.preventDefault();
-    // setPostData({
-    //   ...postData,
-    //   message: draftToHtml(convertToRaw(editorState.getCurrentContent())),
-    // });
-    // setPostData({ ...postData, selectedFile: imageUrl });
-    // console.log(postData);
+    e.preventDefault();
+    postData.message = draftToHtml(
+      convertToRaw(editorState.getCurrentContent())
+    );
+    console.log(postData);
     //!commented for test purpose
     dispatch(createPost({ ...postData, name: user?.result?.name }, navigate));
     navigate('/');
@@ -128,7 +139,6 @@ const Form = ({ currentId, setCurrentId }) => {
               }
             />
           </div>
-
           {/* <TextField
             name='message'
             variant='outlined'
@@ -141,11 +151,37 @@ const Form = ({ currentId, setCurrentId }) => {
               setPostData({ ...postData, message: e.target.value })
             }
           /> */}
-
-          <Editor editorState={editorState} setEditorState={setEditorState} />
+          {/* //editor adding */}
+          <Editor
+            editorState={editorState}
+            wrapperClassName='editor-wrapper'
+            editorClassName='editor'
+            toolbarClassName='editor-toolbar'
+            toolbar={{
+              fontFamily: {
+                options: [
+                  'Poppins',
+                  'Nunito',
+                  'Georgia',
+                  'Times New Roman',
+                  'Verdana',
+                ],
+              },
+              image: {
+                uploadEnabled: true,
+                uploadCallback: uploadFile,
+                previewImage: true,
+                defaultSize: {
+                  height: '100%',
+                  width: '100%',
+                },
+              },
+            }}
+            onEditorStateChange={(editorState) => setEditorState(editorState)}
+          ></Editor>
           <div
             className={classes.fileInput}
-            style={{ display: 'flex', justifyContent: 'space-between' }}
+            style={{ display: 'flex', justifyContent: 'flex-end' }}
           >
             <Fab
               color='secondary'
