@@ -9,6 +9,9 @@ import {
   Button,
   Typography,
 } from '@material-ui/core';
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
+import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import EditRoadTwoToneIcon from '@mui/icons-material/EditRoadTwoTone';
 import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
 import DeleteIcon from '@material-ui/icons/Delete';
@@ -62,6 +65,7 @@ const Post = ({ post, setCurrentId }) => {
   const editPost = () => {
     navigate(`/posts/edit/${post._id}`);
   };
+
   return (
     <Card
       className={classes.card}
@@ -74,13 +78,7 @@ const Post = ({ post, setCurrentId }) => {
         image={post?.selectedFile}
         title={post?.title}
       />
-      <div className={classes.overlay}>
-        <Typography variant='h6'>{post?.name}</Typography>
-        {/* here created at time relative to server fix rwmainint */}
-        <Typography variant='body2'>
-          {moment(post?.createdAt).fromNow()}
-        </Typography>
-      </div>
+
       {(user?.result?.googleId === post?.creator ||
         user?.result?._id === post?.creator) && (
         <div className={classes.overlay2}>
@@ -92,12 +90,37 @@ const Post = ({ post, setCurrentId }) => {
             }}
             title='Edit Post'
             endIcon={<EditRoadTwoToneIcon sx={{ fontSize: 40 }} />}
-          >
-            {/* <MoreHorizIcon fontSize='default' /> */}
-          </Button>
+          ></Button>
         </div>
       )}
-      <div onClick={openPost} style={{ cursor: 'pointer' }}>
+      <div onClick={openPost} style={{ cursor: 'pointer', margin: '10px' }}>
+        <div className={classes.overlay}>
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'row',
+              justifyContent: 'space-evenly',
+            }}
+          >
+            <PersonOutlineIcon color='secondary' cursor='default' />{' '}
+            <Typography style={{ marginLeft: '5px', marginRight: '5px' }}>
+              {post?.name}
+            </Typography>
+          </div>
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'row',
+              justifyContent: 'space-evenly',
+            }}
+          >
+            <CalendarMonthIcon color='secondary' />{' '}
+            <Typography style={{ marginLeft: '5px' }}>
+              {moment(post?.createdAt).format('MMM Do YY')}
+            </Typography>
+          </div>
+        </div>
+
         <div
           className={classes.details}
           style={{ display: 'flex', justifyContent: 'flex-start' }}
@@ -114,22 +137,7 @@ const Post = ({ post, setCurrentId }) => {
         >
           {post && post.title}
         </Typography>
-        {/* <CardContent>
-          <Typography
-            className={classes.title}
-            variant='body2'
-            color='textSecondary'
-            component='p'
-            style={{ color: '#f9f8f8' }}
-          >
-            {post.message.length > 50
-              ? `${post.message.substring(0, 70)}...`
-              : post.message}
-          </Typography>
-        </CardContent> */}
       </div>
-
-      {/* </ButtonBase> */}
       <CardActions className={classes.cardActions}>
         <Button
           size='small'
@@ -142,6 +150,23 @@ const Post = ({ post, setCurrentId }) => {
         >
           <Likes />
         </Button>
+        <Button
+          size='small'
+          style={{
+            backgroundColor: 'rgb(229, 197, 88)',
+            borderRadius: '10px',
+            margin: '5px',
+            padding: '5px 5px 5px 10px',
+          }}
+          onClick={() => {
+            dispatch(openPost);
+          }}
+          title='Open Post'
+        >
+          Read more
+          <KeyboardArrowRightIcon />
+        </Button>
+
         {(user?.result?.googleId === post?.creator ||
           user?.result?._id === post?.creator) && (
           <Button

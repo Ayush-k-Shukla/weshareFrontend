@@ -10,6 +10,8 @@ import {
   Button,
   LinearProgress,
 } from '@material-ui/core';
+import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
+import ThumbUpAltOutlined from '@material-ui/icons/ThumbUpAltOutlined';
 import Tag from './Tag';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -17,6 +19,7 @@ import { getPost, getPostsBySearch } from '../../actions/posts';
 import useStyles from './styles.js';
 import moment from 'moment';
 import Loader from '../Loader/Loader';
+import { likePost } from '../../api';
 
 const CardRecommended = lazy(() => import('./CardRecommended'));
 const CommentSection = lazy(() => import('./CommentSection'));
@@ -30,6 +33,7 @@ const PostIndividual = () => {
   console.log(posts);
   const classes = useStyles();
   const { id } = useParams();
+  const user = JSON.parse(localStorage.getItem('profile'));
 
   // var scrollLeft = element.scrollLeft;
 
@@ -54,6 +58,33 @@ const PostIndividual = () => {
 
   const recommendedPosts = posts?.filter((pos) => pos._id !== post?._id);
   console.log(recommendedPosts);
+  const Likes = () => {
+    if (post.likes.length > 0) {
+      return post.likes.find(
+        (like) => like === (user?.result?.googleId || user?.result?._id)
+      ) ? (
+        <>
+          <ThumbUpAltIcon fontSize='small' />
+          &nbsp;
+          {post.likes.length > 2
+            ? `You and ${post.likes.length - 1} others`
+            : `${post.likes.length} like${post.likes.length > 1 ? 's' : ''}`}
+        </>
+      ) : (
+        <>
+          <ThumbUpAltOutlined fontSize='small' />
+          &nbsp;{post.likes.length} {post.likes.length === 1 ? 'Like' : 'Likes'}
+        </>
+      );
+    }
+
+    return (
+      <>
+        <ThumbUpAltOutlined fontSize='small' />
+        &nbsp;Like
+      </>
+    );
+  };
 
   return (
     <div>
@@ -82,14 +113,13 @@ const PostIndividual = () => {
           </div>
           <div
             style={{
-              color: '#91b2e0',
+              color: '#F190B7',
               display: 'flex',
               justifyContent: 'space-between',
             }}
           >
-            {' '}
-            <Typography variant='h6'>Created by: {post.data.name}</Typography>
-            <Typography variant='body1'>
+            <Typography>Created by: {post.data.name}</Typography>
+            <Typography>
               {moment(post.data.createdAt).format('MMM Do YY')}
             </Typography>
           </div>
@@ -121,9 +151,12 @@ const PostIndividual = () => {
             </div>
           </div>
 
+
           <CommentSection post={post.data} />
 
-          <Divider style={{ margin: '20px 0', color: '#044ac5' }} />
+          <Divider
+            style={{ margin: '20px 0', color: '#044ac5', color: 'white' }}
+          />
 
           {recommendedPosts?.length && (
             <div
@@ -134,14 +167,11 @@ const PostIndividual = () => {
                 flexWrap: 'wrap',
               }}
             >
-              {/* <Button onClick={() => scroll(-20)}>LEFT</Button> */}
               {recommendedPosts.map((post) => (
                 <CardRecommended post={post} />
               ))}
-              {/* <Button onClick={() => scroll(20)}>RIGHT</Button> */}
             </div>
           )}
-          {/* </Suspense> */}
         </div>
       )}
     </div>

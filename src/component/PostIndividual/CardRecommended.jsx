@@ -36,14 +36,10 @@ const CardRecommended = ({ post }) => {
             post.selectedFile ||
             'https://user-images.githubusercontent.com/194400/49531010-48dad180-f8b1-11e8-8d89-1e61320e1d82.png'
           }
-          alt='green iguana'
         />
         <CardContent>
           <Typography gutterBottom variant='h5' component='div'>
             {post.title}
-          </Typography>
-          <Typography variant='body2' color='text.secondary'>
-            {post.message.substring(0, 50)}
           </Typography>
         </CardContent>
       </CardActionArea>

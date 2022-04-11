@@ -6,8 +6,9 @@ export default makeStyles((theme) => ({
     marginBottom: '1rem',
     display: 'flex',
     padding: '5px',
-
-    justifyContent: 'space-between',
+    justifyContent: 'space-around',
+    flexDirection: 'row',
+    // flexWrap: 'wrap',
   },
   pagination: {
     borderRadius: 4,

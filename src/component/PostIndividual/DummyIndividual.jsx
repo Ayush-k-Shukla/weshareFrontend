@@ -90,7 +90,8 @@ import {
 } from '@material-ui/core';
 
 import ReactHtmlParser from 'react-html-parser';
-
+import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
+import ThumbUpAltOutlined from '@material-ui/icons/ThumbUpAltOutlined';
 import Tag from './Tag';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -98,6 +99,7 @@ import { getPost, getPostsBySearch } from '../../actions/posts';
 import useStyles from './styles.js';
 import moment from 'moment';
 import Loader from '../Loader/Loader';
+import { likePost } from '../../api';
 
 const CardRecommended = lazy(() => import('./CardRecommended'));
 const CommentSection = lazy(() => import('./CommentSection'));
@@ -108,6 +110,7 @@ const DummyIndividual = () => {
   const { post, isLoading, posts } = useSelector((state) => state.posts);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const user = JSON.parse(localStorage.getItem('profile'));
   console.log(posts);
   const classes = useStyles();
   const { id } = useParams();
@@ -127,7 +130,33 @@ const DummyIndividual = () => {
       );
     }
   }, [post]);
+  const Likes = () => {
+    if (post.likes.length > 0) {
+      return post.likes.find(
+        (like) => like === (user?.result?.googleId || user?.result?._id)
+      ) ? (
+        <>
+          <ThumbUpAltIcon fontSize='small' />
+          &nbsp;
+          {post.likes.length > 2
+            ? `You and ${post.likes.length - 1} others`
+            : `${post.likes.length} like${post.likes.length > 1 ? 's' : ''}`}
+        </>
+      ) : (
+        <>
+          <ThumbUpAltOutlined fontSize='small' />
+          &nbsp;{post.likes.length} {post.likes.length === 1 ? 'Like' : 'Likes'}
+        </>
+      );
+    }
 
+    return (
+      <>
+        <ThumbUpAltOutlined fontSize='small' />
+        &nbsp;Like
+      </>
+    );
+  };
   if (isLoading) {
     return <Loader />;
   }
@@ -191,6 +220,25 @@ const DummyIndividual = () => {
                 {ReactHtmlParser(post.data.message)}
               </Typography>
             </div>
+          </div>
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'row',
+            }}
+          >
+            <Button
+              size='small'
+              style={{ color: '#044ac5' }}
+              disabled={!user?.result}
+              onClick={() => {
+                dispatch(likePost(post._id));
+              }}
+              title='Like Post'
+            >
+              <h6>like and other</h6>
+              {/* <Likes /> */}
+            </Button>
           </div>
 
           <CommentSection post={post.data} />
