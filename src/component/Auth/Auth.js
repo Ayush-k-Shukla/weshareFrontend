@@ -45,7 +45,7 @@ const Auth = () => {
     setformData(formData);
     if (isSignup) {
       dispatch(signUp(formData, navigate));
-      // console.log(formData);
+
     } else {
       dispatch(signIn(formData, navigate));
     }
@@ -57,7 +57,7 @@ const Auth = () => {
   const googleSuccess = async (res) => {
     const result = await res?.profileObj; //optional chaining
     const token = await res?.tokenId;
-    console.log(`google suc :${result} ${token}`);
+
     try {
       dispatch({ type: 'AUTH', data: { result, token } });
     } catch (e) {

@@ -41,12 +41,7 @@ const Form = ({ currentId, setCurrentId }) => {
   const user = JSON.parse(localStorage.getItem('profile'));
 
   useEffect(() => {
-    //err ;; post dat not coming fix this and post also nu;l
-    // console.log(post);
-    // console.log(`cid : ${currentId}`);
-
     if (post) setPostData(post);
-    // console.log(postData);
   }, [post]);
 
   const handleSubmit = async (e) => {

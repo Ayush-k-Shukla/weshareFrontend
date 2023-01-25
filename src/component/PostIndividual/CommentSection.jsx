@@ -15,7 +15,6 @@ const CommentSection = (post) => {
   const [comment, setComment] = useState('');
   const dispatch = useDispatch();
   const user = JSON.parse(localStorage.getItem('profile'));
-  // console.log(post);
   const handleSubmit = async () => {
     const finalComment = `${user.result.name}: ${comment}`;
     const newComments = await dispatch(

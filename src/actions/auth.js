@@ -32,7 +32,7 @@ export const signIn = (formData, navigate) => async (dispatch) => {
 
 export const signUp = (formData, navigate) => async (dispatch) => {
   try {
-    // console.log(`in axtin : ${formData.firstName}`);
+
 
     const { data } = await api.signUp(formData);
     dispatch({ type: 'AUTH', data });

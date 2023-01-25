@@ -27,20 +27,18 @@ const PostIndividual = () => {
   const { post, isLoading, posts } = useSelector((state) => state.posts);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  console.log(posts);
+
   const classes = useStyles();
   const { id } = useParams();
 
   // var scrollLeft = element.scrollLeft;
 
   useEffect(() => {
-    console.log('first');
     dispatch(getPost(id));
   }, [id]);
 
   useEffect(() => {
     if (post) {
-      console.log('secon');
       dispatch(
         getPostsBySearch({ search: 'none', tags: post?.data?.tags.join(',') })
       );
@@ -53,7 +51,6 @@ const PostIndividual = () => {
   if (!post) return null;
 
   const recommendedPosts = posts?.filter((pos) => pos._id !== post?._id);
-  console.log(recommendedPosts);
 
   return (
     <div>

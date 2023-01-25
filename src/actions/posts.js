@@ -22,7 +22,7 @@ export const getPosts = (page) => async (dispatch) => {
     dispatch({ type: 'START_LOADING' });
 
     const data = await api.fetchPosts(page);
-    console.log(data);
+
     dispatch({ type: 'FETCH_ALL', payload: data });
     dispatch({ type: 'END_LOADING' });
   } catch (error) {
@@ -33,10 +33,8 @@ export const getPosts = (page) => async (dispatch) => {
 export const getPostsBySearch = (searchQuery) => async (dispatch) => {
   try {
     dispatch({ type: 'START_LOADING' });
-    console.log(`query : ${JSON.stringify(searchQuery)}`);
+
     const data = await api.fetchPostsBySearch(searchQuery);
-    console.log(data);
-    //data = data.data;
     dispatch({ type: 'FETCH_BY_SEARCH', payload: data });
     dispatch({ type: 'END_LOADING' });
   } catch (error) {
@@ -66,9 +64,8 @@ export const createPost = (post, navigate) => async (dispatch) => {
 
 export const updatePost = (id, post) => async (dispatch) => {
   try {
-    console.log(post);
     const { data } = await api.updatePost(post, id);
-    console.log(data);
+
     dispatch({ type: 'UPDATE', payload: data });
     toast.success('Post updated successfully!', {
       style: {
@@ -120,10 +117,10 @@ export const likePost = (id) => async (dispatch) => {
 
 export const commentPost = (finalComment, id) => async (dispatch) => {
   try {
-    console.log(`${finalComment} ${id}`);
+
     const { data } = await api.commentPost(id, finalComment);
 
-    console.log(data);
+
     dispatch({ type: 'COMMENT', payload: data });
     toast.success('Comment posted successfully', {
       icon: '👏',

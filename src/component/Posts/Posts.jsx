@@ -12,7 +12,6 @@ const Posts = ({ setCurrentId }) => {
   const data = useSelector((state) => state.posts);
   const posts = data.posts;
   const isLoading = data.isLoading;
-  console.log(data);
   const classes = useStyles();
   if (!isLoading && !posts?.length) return 'no posts';
 

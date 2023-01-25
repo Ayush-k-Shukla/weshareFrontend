@@ -22,7 +22,6 @@ import { useNavigate } from 'react-router-dom';
 import Tag from '../../PostIndividual/Tag';
 
 const Post = ({ post, setCurrentId }) => {
-  // console.log(`id : ${post._id}`);
   const classes = useStyles();
   const dispatch = useDispatch();
   const navigate = useNavigate();

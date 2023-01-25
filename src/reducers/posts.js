@@ -26,7 +26,6 @@ const reducers = (state = { isLoading: true, posts: [] }, action) => {
         ),
       };
     case 'COMMENT':
-      console.log(state.posts);
       return {
         ...state,
         posts: state.posts?.data?.data?.map((post) => {

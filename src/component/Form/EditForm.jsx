@@ -41,21 +41,12 @@ const EditForm = () => {
   const user = JSON.parse(localStorage.getItem('profile'));
 
   useEffect(() => {
-    // console.log(`cid : ${currentId}`);
-
     if (post) setPostData(post);
-    // console.log(postData);
   }, [post]);
 
   const handleSubmit = async (e) => {
-    //if use prevent default "react-error-overlay": "6.0.9", this is rquired
-
-    //this prevent default err need to be fixe
     e.preventDefault();
-    console.log(postData);
-    console.log(currentId);
     dispatch(updatePost(currentId, { ...postData, name: user?.result?.name }));
-
     navigate('/');
   };
 

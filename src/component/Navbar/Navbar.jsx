@@ -55,7 +55,6 @@ const Navbar = () => {
     }
 
     setUser(JSON.parse(localStorage.getItem('profile')));
-    // console.log(`in : ${JSON.parse(localStorage.getItem('profile'))}`);
   }, [location]);
 
   //check
