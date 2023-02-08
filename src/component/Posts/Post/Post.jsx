@@ -2,27 +2,25 @@ import React from 'react';
 import useStyles from './styles';
 
 import {
+  Button,
   Card,
   CardActions,
   CardContent,
   CardMedia,
-  Button,
   Typography,
 } from '@material-ui/core';
-import { ButtonBase } from '@mui/material';
-import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
 import DeleteIcon from '@material-ui/icons/Delete';
-import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
-import moment from 'moment';
-import { deletePost, likePost } from '../../../actions/posts.js';
-import { useDispatch } from 'react-redux';
+import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
 import ThumbUpAltOutlined from '@material-ui/icons/ThumbUpAltOutlined';
+import EditRoadTwoToneIcon from '@mui/icons-material/EditRoadTwoTone';
+import moment from 'moment';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { deletePost, likePost } from '../../../actions/posts.js';
 
 import Tag from '../../PostIndividual/Tag';
 
 const Post = ({ post, setCurrentId }) => {
-  // console.log(`id : ${post._id}`);
   const classes = useStyles();
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -58,6 +56,10 @@ const Post = ({ post, setCurrentId }) => {
   const openPost = () => {
     navigate(`/posts/${post._id}`);
   };
+
+  const editPost = () => {
+    navigate(`/posts/edit/${post._id}`);
+  };
   return (
     <Card
       className={classes.card}
@@ -84,11 +86,12 @@ const Post = ({ post, setCurrentId }) => {
             style={{ color: 'white' }}
             size='small'
             onClick={() => {
-              navigate('/create');
-              setCurrentId(post._id);
+              editPost();
             }}
+            title='Edit Post'
+            endIcon={<EditRoadTwoToneIcon sx={{ fontSize: 40 }} />}
           >
-            <MoreHorizIcon fontSize='default' />
+            {/* <MoreHorizIcon fontSize='default' /> */}
           </Button>
         </div>
       )}
@@ -118,7 +121,7 @@ const Post = ({ post, setCurrentId }) => {
             style={{ color: '#f9f8f8' }}
           >
             {post.message.length > 50
-              ? `${post.message.substring(0, 50)}...`
+              ? `${post.message.substring(0, 70)}...`
               : post.message}
           </Typography>
         </CardContent>
@@ -133,6 +136,7 @@ const Post = ({ post, setCurrentId }) => {
           onClick={() => {
             dispatch(likePost(post._id));
           }}
+          title='Like Post'
         >
           <Likes />
         </Button>
@@ -141,7 +145,9 @@ const Post = ({ post, setCurrentId }) => {
           <Button
             size='small'
             color='primary'
+            style={{ color: '#044ac5' }}
             onClick={() => dispatch(deletePost(post._id))}
+            title='Delete Post'
           >
             <DeleteIcon fontSize='small' />
             &nbsp; DELETE &nbsp;

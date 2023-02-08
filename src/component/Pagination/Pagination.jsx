@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react';
 import { Pagination, PaginationItem } from '@mui/material';
-import useStyles from './styles.js';
-import { Link } from 'react-router-dom';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { getPosts } from '../../actions/posts.js';
+import useStyles from './styles.js';
 
 const Paginate = ({ page }) => {
   const classes = useStyles();

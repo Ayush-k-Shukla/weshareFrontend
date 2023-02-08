@@ -1,18 +1,17 @@
-import React, { useState } from 'react';
 import {
   Avatar,
-  Grid,
-  Typography,
   Button,
-  Paper,
   Container,
-  CssBaseline,
+  Grid,
+  Paper,
+  Typography,
 } from '@material-ui/core';
-import { GoogleLogin } from 'react-google-login';
-import useStyles from './styles';
 import LockOutlinedIcon from '@material-ui/icons/LockOpenOutlined';
-import Input from './Input';
+import React, { useState } from 'react';
+import { GoogleLogin } from 'react-google-login';
 import Icon from './Icon';
+import Input from './Input';
+import useStyles from './styles';
 
 import { useNavigate } from 'react-router-dom';
 
@@ -45,7 +44,6 @@ const Auth = () => {
     setformData(formData);
     if (isSignup) {
       dispatch(signUp(formData, navigate));
-      // console.log(formData);
     } else {
       dispatch(signIn(formData, navigate));
     }
@@ -57,7 +55,7 @@ const Auth = () => {
   const googleSuccess = async (res) => {
     const result = await res?.profileObj; //optional chaining
     const token = await res?.tokenId;
-    console.log(`google suc :${result} ${token}`);
+
     try {
       dispatch({ type: 'AUTH', data: { result, token } });
     } catch (e) {
@@ -86,7 +84,9 @@ const Auth = () => {
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
         </Avatar>
-        <Typography variant='h5'>{isSignup ? 'SignUP' : 'SignIN'}</Typography>
+        <Typography variant='h5' style={{ color: '#f0f1f0 !important' }}>
+          {isSignup ? 'SignUP' : 'SignIN'}
+        </Typography>
         <form className={classes.form} onSubmit={handleSubmit} half={true}>
           <Grid container spacing={2}>
             {isSignup && (
@@ -133,7 +133,11 @@ const Auth = () => {
             type='submit'
             fullWidth
             variant='contained'
-            color='primary'
+            style={{
+              backgroundColor: '#3f51b5',
+              color: 'yellowgreen',
+              fontWeight: 600,
+            }}
             className={classes.submit}
           >
             {isSignup ? 'SignUp' : 'SignIn'}
@@ -149,8 +153,9 @@ const Auth = () => {
                 disabled={renderProps.disabled}
                 startIcon={<Icon />}
                 variant='contained'
+                style={{ backgroundColor: '#3f51b5', color: 'yellowgreen' }}
               >
-                <Typography style={{ fontWeight: 600, color: 'blue' }}>
+                <Typography style={{ fontWeight: 600 }}>
                   Google Sign In
                 </Typography>
               </Button>
@@ -161,7 +166,7 @@ const Auth = () => {
           />
           <Grid container justify='flex-end'>
             <Grid item>
-              <Button onClick={switchMode} variant='body-2'>
+              <Button onClick={switchMode} color='primary'>
                 {isSignup
                   ? 'Already have an account? Sign In'
                   : `Don't have an account?Sign Up`}

@@ -1,23 +1,17 @@
-import React, { useEffect, useState } from 'react';
-import Posts from '../Posts/Posts';
-import Form from '../Form/Form';
-import useStyles from './styles';
-import {
-  Paper,
-  Container,
-  Grow,
-  Grid,
-  AppBar,
-  Button,
-} from '@material-ui/core';
+import { Button, Container, Grid, Grow, Paper } from '@material-ui/core';
+import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
+import React, { lazy, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { getPosts, getPostsBySearch } from '../../actions/posts';
+import { getPostsBySearch } from '../../actions/posts';
+import useStyles from './styles';
 
-import { useLocation, useNavigate } from 'react-router-dom';
 import ChipInput from 'material-ui-chip-input';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import Paginate from '../Pagination/Pagination';
-import { TextField } from '@mui/material';
+
+const Posts = lazy(() => import('../Posts/Posts'));
+const Form = lazy(() => import('../Form/Form'));
 
 const useQuery = () => {
   return new URLSearchParams(useLocation().search);
@@ -29,17 +23,15 @@ const Home = () => {
   const dispatch = useDispatch();
 
   const navigate = useNavigate();
-  const location = useLocation();
+
   const query = useQuery();
 
   const page = query.get('page') || 1;
-  const searchQuery = query.get('searchQuery');
 
   const [search, setSearch] = useState('');
   const [tagSearch, settagSearch] = useState([]);
 
   const handleSearchKeyPress = (e) => {
-    //enter key press
     if (e.keyCode === 13) {
       searchPost();
     }
@@ -50,7 +42,6 @@ const Home = () => {
 
   const searchPost = () => {
     if (search.trim() || tagSearch) {
-      //fetch post by search
       dispatch(getPostsBySearch({ search, tags: tagSearch.join(',') }));
       navigate(
         `/posts/search?searchQuery=${search || 'none'}&tags=${tagSearch.join(
@@ -63,7 +54,6 @@ const Home = () => {
   };
   return (
     <div style={{ padding: '40px 14px' }}>
-      {/* <div> */}
       <Container className={classes.appBarSearch}>
         <Container
           style={{
@@ -74,7 +64,7 @@ const Home = () => {
         >
           <input
             name='search'
-            label='Search Title'
+            label='Search by Title'
             onKeyPress={handleSearchKeyPress}
             value={search}
             placeholder='Search title....'
@@ -94,7 +84,7 @@ const Home = () => {
             className={classes.searchClass}
             value={tagSearch}
             onAdd={handleTagAdd}
-            placeholder='Search tags...'
+            placeholder='Search by tags...'
             onDelete={handleTagDelete}
             disableUnderline={true}
             style={{
@@ -112,7 +102,6 @@ const Home = () => {
 
         <Button
           onClick={searchPost}
-          // className={classes.searchButton}
           color='primary'
           variant='contained'
           style={{
@@ -121,17 +110,17 @@ const Home = () => {
             borderRadius: '10px',
             textTransform: 'none',
           }}
+          endIcon={<SearchOutlinedIcon color='success' />}
         >
           Search
         </Button>
       </Container>
-      {/* </div> */}
       <Grow in>
         <Container maxWidth='xl'>
           <Grid item xs={12} sm={6} md={12}>
             <Posts setCurrentId={setCurrentId} />
           </Grid>
-          {/* </Grid> */}
+
           <div
             style={{
               display: 'flex',

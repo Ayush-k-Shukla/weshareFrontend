@@ -1,29 +1,33 @@
 import {
-  Button, Container, Paper, TextField, Typography
+  Button,
+  Container,
+  Paper,
+  TextField,
+  Typography,
 } from '@material-ui/core';
-import React, { useEffect, useRef, useState } from 'react';
-
 import SendIcon from '@mui/icons-material/Send';
+import React, { useEffect, useState } from 'react';
+import FileBase from 'react-file-base64';
 
 import useStyles from './styles';
 
 import { useDispatch } from 'react-redux';
 // * import middlrware to dispatch from action not from apis
-import { createPost } from '../../actions/posts';
+import { updatePost } from '../../actions/posts.js';
 
 import { useSelector } from 'react-redux';
 
 import { Link } from 'react-router-dom';
 
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
-const Form = ({ currentId, setCurrentId }) => {
+const EditForm = () => {
   const classes = useStyles();
+  const { id } = useParams();
+  const currentId = id;
   const post = useSelector((state) =>
     currentId ? state.posts.posts.find((p) => p._id === currentId) : null
   );
-  const { isLoading } = useSelector((state) => state);
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [postData, setPostData] = useState({
@@ -33,32 +37,17 @@ const Form = ({ currentId, setCurrentId }) => {
     selectedFile: '',
   });
 
-  const [file, setFile] = useState(undefined);
-  const uploadRef = useRef(null);
-
+  //user stored in local
   const user = JSON.parse(localStorage.getItem('profile'));
 
   useEffect(() => {
     if (post) setPostData(post);
   }, [post]);
 
-  const uploadFile = (e) => {
-    let files = e.target.files;
-    if (files && files[0]) {
-      setFile(files[0]);
-    }
-  };
-
   const handleSubmit = async (e) => {
-    //if use prevent default "react-error-overlay": "6.0.9", this is rquired
-
-    //this prevent default err need to be fixe
     e.preventDefault();
-    // dispatch(uploadFileToCloudinary(file));
-
-    dispatch(
-      createPost({ ...postData, name: user?.result?.name }, navigate, file)
-    );
+    dispatch(updatePost(currentId, { ...postData, name: user?.result?.name }));
+    navigate('/');
   };
 
   if (!user?.result?.name) {
@@ -73,7 +62,7 @@ const Form = ({ currentId, setCurrentId }) => {
   }
 
   return (
-    <div style={{ marginTop: '40px' }}>
+    <div style={{ marginTop: '40px', backgroundColor: 'none !important' }}>
       <Container className={classes.paper} elevation={6}>
         <Typography
           variant='h5'
@@ -85,7 +74,7 @@ const Form = ({ currentId, setCurrentId }) => {
           }}
           width='100%'
         >
-          {currentId ? 'Editing' : 'Creating'} a Post
+          {currentId ? 'editing' : 'creating'} a blog
         </Typography>
         <form
           autoComplete='off'
@@ -93,18 +82,12 @@ const Form = ({ currentId, setCurrentId }) => {
           className={`${classes.root} ${classes.form}`}
           onSubmit={handleSubmit}
         >
-          <div
-            style={{
-              display: 'flex',
-              justifyContent: 'space-around',
-              width: '100%',
-            }}
-          >
+          <div style={{ display: 'flex', justifyContent: 'space-around' }}>
             <TextField
               name='title'
               variant='outlined'
               label='Title'
-              maxRows={4}
+              maxRows={6}
               style={{ color: 'black !important' }}
               value={postData.title}
               onChange={(e) =>
@@ -115,7 +98,6 @@ const Form = ({ currentId, setCurrentId }) => {
               name='tags'
               variant='outlined'
               label='tags'
-              placeholder='enter comment seprated by comma'
               value={postData?.tags}
               onChange={(e) =>
                 setPostData({ ...postData, tags: e.target.value.split(',') })
@@ -135,35 +117,30 @@ const Form = ({ currentId, setCurrentId }) => {
             }
           />
 
-          <div
-            className={classes.fileInput}
-            style={{ display: 'flex', justifyContent: 'space-between' }}
-          >
-            <input
-              ref={uploadRef}
-              accept='image/*'
+          <div className={classes.fileInput}>
+            <FileBase
               type='file'
-              name='file'
-              onChange={uploadFile}
-              multiple={false}
+              mutiple={false}
+              onDone={({ base64 }) =>
+                setPostData({ ...postData, selectedFile: base64 })
+              }
             />
-            <Button
-              className={classes.buttonSubmit}
-              variant='contained'
-              color='primary'
-              size='large'
-              type='submit'
-              fullWidth
-              style={{ width: '20%' }}
-              endIcon={<SendIcon />}
-            >
-              Submit
-            </Button>
           </div>
+          <Button
+            className={classes.buttonSubmit}
+            variant='contained'
+            color='primary'
+            size='large'
+            type='submit'
+            fullWidth
+            endIcon={<SendIcon />}
+          >
+            Submit
+          </Button>
         </form>
       </Container>
     </div>
   );
 };
 
-export default Form;
+export default EditForm;

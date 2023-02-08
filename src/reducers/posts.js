@@ -1,4 +1,7 @@
-const reducers = (state = { isLoading: true, posts: [] }, action) => {
+const reducers = (
+  state = { isLoading: true, posts: [], url: 'gfhdf' },
+  action
+) => {
   switch (action.type) {
     case 'START_LOADING':
       return { ...state, isLoading: true };
@@ -14,7 +17,7 @@ const reducers = (state = { isLoading: true, posts: [] }, action) => {
     case 'FETCH_ONE':
       return { ...state, post: action.payload };
     case 'FETCH_BY_SEARCH':
-      return { ...state, posts: action.payload };
+      return { ...state, posts: action.payload.data.data };
     case 'CREATE':
       return [...state, action.payload];
     case 'UPDATE':
@@ -28,14 +31,21 @@ const reducers = (state = { isLoading: true, posts: [] }, action) => {
     case 'COMMENT':
       return {
         ...state,
-        posts: state.posts?.map((post) =>
-          post._id === action.payload._id ? action.payload : post
-        ),
+        posts: state.posts?.data?.data?.map((post) => {
+          if (post._id === action.payload._id) {
+            return action.payload;
+          }
+          return post;
+        }),
       };
     case 'DELETE':
       return {
         ...state,
         posts: state.posts.filter((post) => post._id !== action.payload),
+      };
+    case 'UPLOAD':
+      return {
+        url: action.payload.data,
       };
     default:
       return state;

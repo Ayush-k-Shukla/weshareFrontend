@@ -2,24 +2,38 @@ body {
   margin: 0%;
   background-color: #0a0b1a;
   background: #0a0b1a;
+  font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
 }
 
 .MuiInputBase-input {
   font-size: small !important;
+  color: #909296 !important;
 }
 
-.WAMuiChipInput-standard-18 {
+.WAMuiChipInput-standard-18,
+.WAMuiChipInput-inputRoot-58 {
   color: white !important;
-  padding: 2px 4px;
+  padding: 4px 4px;
+}
+.WAMuiChipInput-standard-66 {
+  padding: 4px 4px;
+  color: white !important;
 }
 
 .mainPage {
   padding: 40px 60px;
 }
-.MuiTextField-root {
+/* .MuiTextField-root {
   background-color: #314054;
-}
-//for add blog form
-..MuiTextField-root {
+} */
+
+.MuiTextField-root {
   width: 100%;
+}
+
+.MuiInputLabel-root {
+  color: #bbbcbe !important;
+}
+.MuiTypography-h5 {
+  color: gainsboro !important;
 }

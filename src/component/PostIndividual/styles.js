@@ -43,10 +43,12 @@ export default makeStyles((theme) => ({
   commentsOuterContainer: {
     display: 'flex',
     justifyContent: 'space-between',
+    flexDirection: 'column-reverse',
   },
   commentsInnerContainer: {
     height: '200px',
     overflowY: 'auto',
     marginRight: '30px',
+    margin: '0px 30px 10px 30px',
   },
 }));
