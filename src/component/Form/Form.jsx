@@ -1,14 +1,8 @@
-import React, { useState, useEffect } from 'react';
 import {
-  TextField,
-  Button,
-  Typography,
-  Paper,
-  Container,
-  Fab,
+  Button, Container, Paper, TextField, Typography
 } from '@material-ui/core';
+import React, { useEffect, useRef, useState } from 'react';
 
-import FileBase from 'react-file-base64';
 import SendIcon from '@mui/icons-material/Send';
 
 import useStyles from './styles';
@@ -28,6 +22,8 @@ const Form = ({ currentId, setCurrentId }) => {
   const post = useSelector((state) =>
     currentId ? state.posts.posts.find((p) => p._id === currentId) : null
   );
+  const { isLoading } = useSelector((state) => state);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [postData, setPostData] = useState({
@@ -37,21 +33,32 @@ const Form = ({ currentId, setCurrentId }) => {
     selectedFile: '',
   });
 
-  //user stored in local
+  const [file, setFile] = useState(undefined);
+  const uploadRef = useRef(null);
+
   const user = JSON.parse(localStorage.getItem('profile'));
 
   useEffect(() => {
     if (post) setPostData(post);
   }, [post]);
 
+  const uploadFile = (e) => {
+    let files = e.target.files;
+    if (files && files[0]) {
+      setFile(files[0]);
+    }
+  };
+
   const handleSubmit = async (e) => {
     //if use prevent default "react-error-overlay": "6.0.9", this is rquired
 
     //this prevent default err need to be fixe
-    // e.preventDefault();
+    e.preventDefault();
+    // dispatch(uploadFileToCloudinary(file));
 
-    dispatch(createPost({ ...postData, name: user?.result?.name }, navigate));
-    navigate('/');
+    dispatch(
+      createPost({ ...postData, name: user?.result?.name }, navigate, file)
+    );
   };
 
   if (!user?.result?.name) {
@@ -132,21 +139,14 @@ const Form = ({ currentId, setCurrentId }) => {
             className={classes.fileInput}
             style={{ display: 'flex', justifyContent: 'space-between' }}
           >
-            <Fab
-              color='secondary'
-              size='small'
-              component='span'
-              aria-label='add'
-              variant='extended'
-            >
-              <FileBase
-                type='file'
-                mutiple={false}
-                onDone={({ base64 }) =>
-                  setPostData({ ...postData, selectedFile: base64 })
-                }
-              />
-            </Fab>
+            <input
+              ref={uploadRef}
+              accept='image/*'
+              type='file'
+              name='file'
+              onChange={uploadFile}
+              multiple={false}
+            />
             <Button
               className={classes.buttonSubmit}
               variant='contained'

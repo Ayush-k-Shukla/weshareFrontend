@@ -1,8 +1,7 @@
 import React, { lazy, Suspense } from 'react';
-// import Post from './Post/Post';
 import useStyles from './styles';
 
-import { Grid, LinearProgress, Box } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
 
 import { useSelector } from 'react-redux';
 import Loader from '../Loader/Loader';
@@ -13,7 +12,19 @@ const Posts = ({ setCurrentId }) => {
   const posts = data.posts;
   const isLoading = data.isLoading;
   const classes = useStyles();
-  if (!isLoading && !posts?.length) return 'no posts';
+  if (!isLoading && !posts?.length)
+    return (
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          color: 'whitesmoke',
+        }}
+      >
+        ! No Posts !
+      </div>
+    );
 
   return (
     <Suspense fallback={<Loader />}>

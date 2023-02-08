@@ -2,22 +2,21 @@ import React from 'react';
 import useStyles from './styles';
 
 import {
+  Button,
   Card,
   CardActions,
   CardContent,
   CardMedia,
-  Button,
   Typography,
 } from '@material-ui/core';
-import EditRoadTwoToneIcon from '@mui/icons-material/EditRoadTwoTone';
-import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
 import DeleteIcon from '@material-ui/icons/Delete';
-import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
-import moment from 'moment';
-import { deletePost, likePost } from '../../../actions/posts.js';
-import { useDispatch } from 'react-redux';
+import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
 import ThumbUpAltOutlined from '@material-ui/icons/ThumbUpAltOutlined';
+import EditRoadTwoToneIcon from '@mui/icons-material/EditRoadTwoTone';
+import moment from 'moment';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { deletePost, likePost } from '../../../actions/posts.js';
 
 import Tag from '../../PostIndividual/Tag';
 

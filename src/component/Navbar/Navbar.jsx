@@ -1,26 +1,24 @@
-import React, { useState, useEffect } from 'react';
 import {
   AppBar,
-  Typography,
-  IconButton,
-  Toolbar,
-  Button,
   Avatar,
-  MenuItem,
+  Button,
+  IconButton,
   Menu,
+  MenuItem,
+  Toolbar,
   Tooltip,
+  Typography,
 } from '@material-ui/core';
 import LoginIcon from '@mui/icons-material/Login';
-import useStyles from './styles.js';
-import logo from '../../images/logo.svg';
+import React, { useEffect, useState } from 'react';
 import { toast } from 'react-hot-toast';
-import { Link } from 'react-router-dom';
-// import Avatar from 'react-avatar';
 import { useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
+import logo from '../../images/logo.svg';
+import useStyles from './styles.js';
 
-import { useNavigate, useLocation } from 'react-router-dom';
 import jwtDecode from 'jwt-decode';
-const settings = ['Logout', 'createPost']; //setting array for profile
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
   const classes = useStyles();
@@ -29,7 +27,7 @@ const Navbar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
-  //err on  navigate
+
   const handleLogout = () => {
     dispatch({ type: 'LOGOUT' });
     navigate('/');
@@ -57,34 +55,18 @@ const Navbar = () => {
     setUser(JSON.parse(localStorage.getItem('profile')));
   }, [location]);
 
-  //check
-  // const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
-  // const handleOpenNavMenu = (event) => {
-  //   setAnchorElNav(event.currentTarget);
-  // };
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
   };
-
-  // const handleCloseNavMenu = () => {
-  //   setAnchorElNav(null);
-  // };
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
 
-  // console.log(user);
-
   return (
-    <AppBar
-      className={classes.appBar}
-      position='static'
-      fullWidth
-      //  style={{ backgroundColor: '#484479' }}
-    >
+    <AppBar className={classes.appBar} position='static' fullWidth>
       <div className={classes.brandContainer}>
         <Typography
           component={Link}

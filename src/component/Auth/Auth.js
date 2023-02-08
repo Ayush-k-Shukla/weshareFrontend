@@ -1,18 +1,17 @@
-import React, { useState } from 'react';
 import {
   Avatar,
-  Grid,
-  Typography,
   Button,
-  Paper,
   Container,
-  CssBaseline,
+  Grid,
+  Paper,
+  Typography,
 } from '@material-ui/core';
-import { GoogleLogin } from 'react-google-login';
-import useStyles from './styles';
 import LockOutlinedIcon from '@material-ui/icons/LockOpenOutlined';
-import Input from './Input';
+import React, { useState } from 'react';
+import { GoogleLogin } from 'react-google-login';
 import Icon from './Icon';
+import Input from './Input';
+import useStyles from './styles';
 
 import { useNavigate } from 'react-router-dom';
 
@@ -45,7 +44,6 @@ const Auth = () => {
     setformData(formData);
     if (isSignup) {
       dispatch(signUp(formData, navigate));
-
     } else {
       dispatch(signIn(formData, navigate));
     }

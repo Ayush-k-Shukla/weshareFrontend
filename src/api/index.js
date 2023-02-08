@@ -15,6 +15,12 @@ API.interceptors.request.use((req) => {
   return req;
 });
 
+export const uploadFileToCloudinary = (file) => {
+  const formData = new FormData();
+  formData.append('file', file);
+  return API.post(`/posts/upload`, formData);
+};
+
 export const fetcPost = (id) => API.get(`/posts/${id}`);
 export const fetchPosts = (page) => API.get(`/posts?page=${page}`);
 export const fetchPostsBySearch = (searchQuery) =>

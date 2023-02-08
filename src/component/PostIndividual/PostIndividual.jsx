@@ -1,37 +1,22 @@
-import React, { useEffect, lazy, Suspense } from 'react';
-import {
-  Container,
-  Paper,
-  Image,
-  CardMedia,
-  CircularProgress,
-  Typography,
-  Divider,
-  Button,
-  LinearProgress,
-} from '@material-ui/core';
-import Tag from './Tag';
-import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate, useParams } from 'react-router-dom';
-import { getPost, getPostsBySearch } from '../../actions/posts';
-import useStyles from './styles.js';
+import { Divider, Typography } from '@material-ui/core';
 import moment from 'moment';
+import React, { lazy, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import { getPost, getPostsBySearch } from '../../actions/posts';
 import Loader from '../Loader/Loader';
+import useStyles from './styles.js';
+import Tag from './Tag';
 
 const CardRecommended = lazy(() => import('./CardRecommended'));
 const CommentSection = lazy(() => import('./CommentSection'));
-// import CardRecommended from './CardRecommended';
-// import CommentSection from './CommentSection';
 
 const PostIndividual = () => {
   const { post, isLoading, posts } = useSelector((state) => state.posts);
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const classes = useStyles();
   const { id } = useParams();
-
-  // var scrollLeft = element.scrollLeft;
 
   useEffect(() => {
     dispatch(getPost(id));
@@ -50,7 +35,7 @@ const PostIndividual = () => {
   }
   if (!post) return null;
 
-  const recommendedPosts = posts?.filter((pos) => pos._id !== post?._id);
+  const recommendedPosts = posts?.filter((pos) => pos._id !== post?.data?._id);
 
   return (
     <div>
@@ -131,14 +116,11 @@ const PostIndividual = () => {
                 flexWrap: 'wrap',
               }}
             >
-              {/* <Button onClick={() => scroll(-20)}>LEFT</Button> */}
               {recommendedPosts.map((post) => (
                 <CardRecommended post={post} />
               ))}
-              {/* <Button onClick={() => scroll(20)}>RIGHT</Button> */}
             </div>
           )}
-          {/* </Suspense> */}
         </div>
       )}
     </div>

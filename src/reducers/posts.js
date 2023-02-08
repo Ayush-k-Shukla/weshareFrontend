@@ -1,4 +1,7 @@
-const reducers = (state = { isLoading: true, posts: [] }, action) => {
+const reducers = (
+  state = { isLoading: true, posts: [], url: 'gfhdf' },
+  action
+) => {
   switch (action.type) {
     case 'START_LOADING':
       return { ...state, isLoading: true };
@@ -39,6 +42,10 @@ const reducers = (state = { isLoading: true, posts: [] }, action) => {
       return {
         ...state,
         posts: state.posts.filter((post) => post._id !== action.payload),
+      };
+    case 'UPLOAD':
+      return {
+        url: action.payload.data,
       };
     default:
       return state;

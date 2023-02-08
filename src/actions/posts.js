@@ -1,9 +1,5 @@
-import * as api from '../api/index.js';
 import { toast } from 'react-hot-toast';
-
-//action creaters
-
-// * always log error not error.message for debug easily
+import * as api from '../api/index.js';
 
 export const getPost = (id) => async (dispatch) => {
   try {
@@ -33,7 +29,6 @@ export const getPosts = (page) => async (dispatch) => {
 export const getPostsBySearch = (searchQuery) => async (dispatch) => {
   try {
     dispatch({ type: 'START_LOADING' });
-
     const data = await api.fetchPostsBySearch(searchQuery);
     dispatch({ type: 'FETCH_BY_SEARCH', payload: data });
     dispatch({ type: 'END_LOADING' });
@@ -42,9 +37,17 @@ export const getPostsBySearch = (searchQuery) => async (dispatch) => {
   }
 };
 
-export const createPost = (post, navigate) => async (dispatch) => {
+export const createPost = (post, navigate, file) => async (dispatch) => {
   try {
     dispatch({ type: 'START_LOADING' });
+    let selectedFile = '';
+    if (file) {
+      selectedFile = await uploadFileToCloudinary(file);
+    }
+    if (selectedFile) {
+      post = { ...post, selectedFile: selectedFile };
+    }
+
     const { data } = await api.createPost(post);
     navigate(`/posts/${data._id}`);
     dispatch({ type: 'CREATE', data });
@@ -57,6 +60,15 @@ export const createPost = (post, navigate) => async (dispatch) => {
         fontFamily: 'revert',
       },
     });
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+export const uploadFileToCloudinary = async (file) => {
+  try {
+    const { data } = await api.uploadFileToCloudinary(file);
+    return data.data;
   } catch (e) {
     console.log(e);
   }
@@ -117,9 +129,7 @@ export const likePost = (id) => async (dispatch) => {
 
 export const commentPost = (finalComment, id) => async (dispatch) => {
   try {
-
     const { data } = await api.commentPost(id, finalComment);
-
 
     dispatch({ type: 'COMMENT', payload: data });
     toast.success('Comment posted successfully', {

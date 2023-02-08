@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
-import { Typography, TextField, Button, IconButton } from '@material-ui/core';
-import SendIcon from '@mui/icons-material/Send';
+import { Button, IconButton, TextField, Typography } from '@material-ui/core';
 import LoginIcon from '@mui/icons-material/Login';
+import SendIcon from '@mui/icons-material/Send';
 import { useDispatch } from 'react-redux';
 
 import { commentPost } from '../../actions/posts.js';

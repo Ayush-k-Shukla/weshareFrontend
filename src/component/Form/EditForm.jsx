@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from 'react';
 import {
-  TextField,
   Button,
-  Typography,
-  Paper,
   Container,
+  Paper,
+  TextField,
+  Typography,
 } from '@material-ui/core';
 import SendIcon from '@mui/icons-material/Send';
+import React, { useEffect, useState } from 'react';
 import FileBase from 'react-file-base64';
 
 import useStyles from './styles';
